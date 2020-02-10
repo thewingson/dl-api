@@ -5,29 +5,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
- * @author Almat on 09.02.2020
+ * @author Almat on 10.02.2020
  *
- * Model class for Faculty
+ * Model class for Department
  */
 
 @Entity
-@Table(name = "faculty")
+@Table(name = "department")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Faculty {
+public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
     private String name;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Set<Department> departments;
+    private String code;
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id", nullable = false)
+    private Faculty faculty;
 
 }

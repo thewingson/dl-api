@@ -11,12 +11,12 @@ import java.util.Optional;
 
 /**
  * @author Almat on 09.02.2020
- *
+ * <p>
  * Rest for {@link Faculty}
  */
 @RestController
 @RequestMapping("/faculty")
-public class FacultyRest{
+public class FacultyRest {
 
     @Autowired
     private FacultyRepository facultyRepository;
@@ -25,37 +25,37 @@ public class FacultyRest{
     private FacultyService facultyService;
 
     @GetMapping
-    public List<Faculty> getAll(){
+    public List<Faculty> getAll() {
         return facultyRepository.findAll();
     }
 
     @GetMapping("{id}")
-    public Optional<Faculty> getOne(@PathVariable("id") Long id){
+    public Optional<Faculty> getOne(@PathVariable("id") Long id) {
         return facultyRepository.findById(id);
     }
 
     @PostMapping
-    public Faculty add(@RequestBody Faculty faculty){
+    public Faculty add(@RequestBody Faculty faculty) {
         return facultyService.create(faculty);
     }
 
     @PostMapping("/all")
-    public List<Faculty> addAll(@RequestBody List<Faculty> faculties){
+    public List<Faculty> addAll(@RequestBody List<Faculty> faculties) {
         return facultyService.createAll(faculties);
     }
 
     @PutMapping
-    public Faculty edit(@RequestBody Faculty faculty){
+    public Faculty edit(@RequestBody Faculty faculty) {
         return facultyService.update(faculty);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) {
         facultyService.delete(id);
     }
 
     @DeleteMapping("/all")
-    public void deleteAll(){
+    public void deleteAll() {
         facultyRepository.deleteAll();
     }
 
