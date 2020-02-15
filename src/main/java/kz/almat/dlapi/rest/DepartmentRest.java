@@ -2,6 +2,7 @@ package kz.almat.dlapi.rest;
 
 import kz.almat.dlapi.model.Department;
 import kz.almat.dlapi.model.Faculty;
+import kz.almat.dlapi.pojo.DepartmentPOJO;
 import kz.almat.dlapi.repository.DepartmentRepository;
 import kz.almat.dlapi.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,14 @@ import java.util.Optional;
 @RequestMapping("/department")
 public class DepartmentRest {
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
+    private final DepartmentService departmentService;
 
     @Autowired
-    private DepartmentService departmentService;
+    public DepartmentRest(DepartmentRepository departmentRepository, DepartmentService departmentService) {
+        this.departmentRepository = departmentRepository;
+        this.departmentService = departmentService;
+    }
 
     @GetMapping
     public List<Department> getAll() {
@@ -37,18 +41,18 @@ public class DepartmentRest {
     }
 
     @PostMapping
-    public Department add(@RequestBody Department department) {
-        return departmentService.create(department);
+    public Department add(@RequestBody DepartmentPOJO departmentPOJO) {
+        return departmentService.create(departmentPOJO);
     }
 
     @PostMapping("/all")
-    public List<Department> addAll(@RequestBody List<Department> departments) {
-        return departmentService.createAll(departments);
+    public List<Department> addAll(@RequestBody List<DepartmentPOJO> departmentPOJOS) {
+        return departmentService.createAll(departmentPOJOS);
     }
 
     @PutMapping
-    public Department edit(@RequestBody Department department) {
-        return departmentService.update(department);
+    public Department edit(@RequestBody DepartmentPOJO departmentPOJOS) {
+        return departmentService.update(departmentPOJOS);
     }
 
     @DeleteMapping("{id}")

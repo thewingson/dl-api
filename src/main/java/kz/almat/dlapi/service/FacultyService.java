@@ -1,6 +1,7 @@
 package kz.almat.dlapi.service;
 
 import kz.almat.dlapi.model.Faculty;
+import kz.almat.dlapi.pojo.FacultyPOJO;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ import java.util.List;
  */
 public interface FacultyService {
 
-    Faculty create(Faculty faculty);
-    List<Faculty> createAll(Iterable<Faculty> mIterable);
-    Faculty update(Faculty faculty);
+    Faculty create(FacultyPOJO facultyPOJO);
+    List<Faculty> createAll(List<FacultyPOJO> facultyPOJOS);
+    Faculty update(FacultyPOJO facultyPOJOS);
     void delete(Long id);
 
 

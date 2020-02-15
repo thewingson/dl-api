@@ -1,6 +1,7 @@
 package kz.almat.dlapi.rest;
 
 import kz.almat.dlapi.model.Faculty;
+import kz.almat.dlapi.pojo.FacultyPOJO;
 import kz.almat.dlapi.repository.FacultyRepository;
 import kz.almat.dlapi.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,14 @@ import java.util.Optional;
 @RequestMapping("/faculty")
 public class FacultyRest {
 
-    @Autowired
-    private FacultyRepository facultyRepository;
+    private final FacultyRepository facultyRepository;
+    private final FacultyService facultyService;
 
     @Autowired
-    private FacultyService facultyService;
+    public FacultyRest(FacultyRepository facultyRepository, FacultyService facultyService) {
+        this.facultyRepository = facultyRepository;
+        this.facultyService = facultyService;
+    }
 
     @GetMapping
     public List<Faculty> getAll() {
@@ -35,18 +39,18 @@ public class FacultyRest {
     }
 
     @PostMapping
-    public Faculty add(@RequestBody Faculty faculty) {
-        return facultyService.create(faculty);
+    public Faculty add(@RequestBody FacultyPOJO facultyPOJO) {
+        return facultyService.create(facultyPOJO);
     }
 
     @PostMapping("/all")
-    public List<Faculty> addAll(@RequestBody List<Faculty> faculties) {
-        return facultyService.createAll(faculties);
+    public List<Faculty> addAll(@RequestBody List<FacultyPOJO> facultyPOJOS) {
+        return facultyService.createAll(facultyPOJOS);
     }
 
     @PutMapping
-    public Faculty edit(@RequestBody Faculty faculty) {
-        return facultyService.update(faculty);
+    public Faculty edit(@RequestBody FacultyPOJO facultyPOJO) {
+        return facultyService.update(facultyPOJO);
     }
 
     @DeleteMapping("{id}")

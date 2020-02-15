@@ -1,10 +1,12 @@
 package kz.almat.dlapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -24,10 +26,12 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Set<Department> departments;
+    @Column(name = "name")
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<Department> departments = new HashSet<>();
 
 }
