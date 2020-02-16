@@ -23,13 +23,13 @@ import java.util.Set;
 public class Faculty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "faculty_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(sequenceName = "faculty_id_seq", name = "faculty_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "name")
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Set<Department> departments = new HashSet<>();

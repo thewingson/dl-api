@@ -32,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.facultyRepository = facultyRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated.
+    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
     @Transactional
     @Override
     public Department create(DepartmentPOJO departmentPOJO) {
@@ -44,7 +44,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.save(department);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated.
+    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
     @Transactional
     @Override
     public List<Department> createAll(List<DepartmentPOJO> departmentPOJO) {
@@ -55,7 +55,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             department.setName(d.getName());
             department.setCode(d.getCode());
             faculty.ifPresent(department::setFaculty);
-
             departments.add(department);
         }
         return departmentRepository.saveAll(departments);

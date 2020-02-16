@@ -12,7 +12,7 @@ import java.util.Optional;
 
 /**
  * @author Almat on 09.02.2020
- * <p>
+ *
  * Rest for {@link Faculty}
  */
 @RestController

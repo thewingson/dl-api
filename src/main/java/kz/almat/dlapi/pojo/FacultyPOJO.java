@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author Almat on 15.02.2020
  *
- * POJO class for {@link kz.almat.dlapi.model.Faculty}
+ * POJO for {@link kz.almat.dlapi.model.Faculty}
  */
 
 @Data

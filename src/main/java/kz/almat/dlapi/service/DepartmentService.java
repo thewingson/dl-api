@@ -11,10 +11,8 @@ import java.util.List;
  * Service for {@link Department}
  */
 public interface DepartmentService {
-
     Department create(DepartmentPOJO departmentPOJO);
     List<Department> createAll(List<DepartmentPOJO> departmentPOJO);
     Department update(DepartmentPOJO departmentPOJO);
     void delete(Long id);
-
 }

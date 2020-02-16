@@ -1,12 +1,15 @@
 package kz.almat.dlapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Almat on 10.02.2020
@@ -22,7 +25,8 @@ import java.util.Objects;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "department_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(sequenceName = "department_id_seq", name = "department_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")
@@ -35,6 +39,10 @@ public class Department {
     @JoinColumn(name = "faculty_id", foreignKey = @ForeignKey(name = "department_faculty_fk"), nullable = false)
     @JsonManagedReference
     private Faculty faculty;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<Group> groups  = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
