@@ -61,6 +61,7 @@ public class DepartmentRest {
         departmentService.delete(id);
     }
 
+    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         departmentRepository.deleteAll();

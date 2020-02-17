@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * @author Almat on 15.02.2020
  *
- * Implementation of service {@link kz.almat.dlapi.service.GroupService}
+ * Implementation of service {@link GroupService}
  */
 
 @Service
@@ -32,7 +32,7 @@ public class GroupServiceImpl implements GroupService {
         this.departmentRepository = departmentRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
     public Group create(GroupPOJO groupPOJO) {
@@ -44,7 +44,7 @@ public class GroupServiceImpl implements GroupService {
         return groupRepository.save(group);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
     public List<Group> createAll(List<GroupPOJO> groupPOJOS) {
@@ -60,7 +60,7 @@ public class GroupServiceImpl implements GroupService {
         return groupRepository.saveAll(groups);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
     public Group update(GroupPOJO groupPOJO) {

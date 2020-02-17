@@ -1,12 +1,15 @@
 package kz.almat.dlapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Almat on 15.02.2020
@@ -38,10 +41,16 @@ public class Group {
     @Column(name = "list_number")
     private Long listNumber;
 
+
+    //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "group_department_fk"), nullable = false)
     @JsonManagedReference
     private Department department;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<Student> students  = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

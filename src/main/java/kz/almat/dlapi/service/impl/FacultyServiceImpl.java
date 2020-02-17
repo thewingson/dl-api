@@ -27,7 +27,7 @@ public class FacultyServiceImpl implements FacultyService {
         this.facultyRepository = facultyRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Faculty from POJO make automated or use constructor.
     @Override
     public Faculty create(FacultyPOJO facultyPOJO) {
         Faculty faculty = new Faculty();
@@ -35,7 +35,7 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Faculty from POJO make automated or use constructor.
     @Transactional
     @Override
     public List<Faculty> createAll(List<FacultyPOJO> facultyPOJOS) {
@@ -48,7 +48,7 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepository.saveAll(faculties);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
+    //TODO: POJO parsing to Aspects. Create Faculty from POJO make automated or use constructor.
     @Override
     public Faculty update(FacultyPOJO facultyPOJO) {
         Faculty faculty = new Faculty();
