@@ -1,11 +1,14 @@
 package kz.almat.dlapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -42,6 +45,10 @@ public class Teacher {
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "teacher_department_fk"), nullable = false)
     @JsonManagedReference
     private Department department;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private List<SubjectClass> subjectClasses = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Almat on 15.02.2020
@@ -51,6 +49,10 @@ public class Group {
     @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Set<Student> students  = new HashSet<>();
+
+    @OneToMany(mappedBy = "group_res", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private List<SubjectClass> subjectClasses = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
