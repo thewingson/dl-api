@@ -17,7 +17,7 @@ public class GroupPOJO {
 
     private Long id;
     private Long grade;
-    private Long number;
+    private Long listNumber;
     private Long departmentId;
 
 }

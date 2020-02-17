@@ -28,6 +28,7 @@ public class FacultyRest {
         this.facultyService = facultyService;
     }
 
+    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Faculty> getAll() {
         return facultyRepository.findAll();

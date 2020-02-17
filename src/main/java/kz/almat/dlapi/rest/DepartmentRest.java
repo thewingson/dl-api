@@ -30,6 +30,7 @@ public class DepartmentRest {
         this.departmentService = departmentService;
     }
 
+    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Department> getAll() {
         return departmentRepository.findAll();

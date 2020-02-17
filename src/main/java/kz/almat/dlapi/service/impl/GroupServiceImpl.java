@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
         Optional<Department> department = departmentRepository.findById(groupPOJO.getDepartmentId());
         Group group = new Group();
         group.setGrade(groupPOJO.getGrade());
-        group.setNumber(groupPOJO.getNumber());
+        group.setListNumber(groupPOJO.getListNumber());
         department.ifPresent(group::setDepartment);
         return groupRepository.save(group);
     }
@@ -53,7 +53,7 @@ public class GroupServiceImpl implements GroupService {
             Optional<Department> department = departmentRepository.findById(g.getDepartmentId());
             Group group = new Group();
             group.setGrade(g.getGrade());
-            group.setNumber(g.getNumber());
+            group.setListNumber(g.getListNumber());
             department.ifPresent(group::setDepartment);
             groups.add(group);
         }
@@ -68,7 +68,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = new Group();
         group.setId(groupPOJO.getId());
         group.setGrade(groupPOJO.getGrade());
-        group.setNumber(groupPOJO.getNumber());
+        group.setListNumber(groupPOJO.getListNumber());
         department.ifPresent(group::setDepartment);
         return groupRepository.save(group);
     }

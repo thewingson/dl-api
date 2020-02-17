@@ -29,6 +29,7 @@ public class GroupRest {
         this.groupService = groupService;
     }
 
+    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Group> getAll() {
         return groupRepository.findAll();
