@@ -11,20 +11,20 @@ import java.util.Objects;
 /**
  * @author almat_rakhmetolla on 17.02.2020
  *
- * Model class for Student
+ * Model class for Teacher
  */
 
 //TODO: Abstract for Teacher and Student. Their all fields are same.
 @Entity
-@Table(name = "student")
+@Table(name = "teacher")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Teacher {
 
     @Id
-    @GeneratedValue(generator = "student_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(sequenceName = "student_id_seq", name = "student_seq", allocationSize = 1)
+    @GeneratedValue(generator = "teacher_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(sequenceName = "teacher_id_seq", name = "teacher_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
@@ -39,23 +39,24 @@ public class Student {
 
     //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
-    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(name = "student_group_fk"), nullable = false)
+    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "teacher_department_fk"), nullable = false)
     @JsonManagedReference
-    private Group group;
+    private Department department;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return Objects.equals(id, student.id) &&
-                Objects.equals(firstName, student.firstName) &&
-                Objects.equals(lastName, student.lastName) &&
-                Objects.equals(middleName, student.middleName);
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(id, teacher.id) &&
+                Objects.equals(firstName, teacher.firstName) &&
+                Objects.equals(lastName, teacher.lastName) &&
+                Objects.equals(middleName, teacher.middleName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, middleName);
     }
+
 }
