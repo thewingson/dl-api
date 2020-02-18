@@ -50,7 +50,7 @@ public class Group {
     @JsonBackReference
     private Set<Student> students  = new HashSet<>();
 
-    @OneToMany(mappedBy = "group_res", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
     @JsonBackReference
     private List<SubjectClass> subjectClasses = new ArrayList<>();
 

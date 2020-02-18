@@ -42,7 +42,7 @@ public class Department {
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     @JsonBackReference
-    private Set<Group> groups  = new HashSet<>();
+    private Set<Group> groups = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

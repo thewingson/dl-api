@@ -1,5 +1,6 @@
 package kz.almat.dlapi.rest;
 
+import kz.almat.dlapi.dto.SubjectClassDTO;
 import kz.almat.dlapi.model.SubjectClass;
 import kz.almat.dlapi.pojo.SubjectClassPOJO;
 import kz.almat.dlapi.repository.SubjectClassRepository;
@@ -41,7 +42,7 @@ public class SubjectClassRest {
     }
 
     @PostMapping
-    public SubjectClass add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
+    public SubjectClassDTO add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
         return subjectClassService.create(subjectClassPOJO);
     }
 

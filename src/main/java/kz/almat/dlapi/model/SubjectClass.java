@@ -35,7 +35,7 @@ public class SubjectClass {
 
     //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
-    @JoinColumn(name = "group_res_id", foreignKey = @ForeignKey(name = "subject_class_group_res_fk"), nullable = false)
+    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(name = "subject_class_group_res_fk"), nullable = false)
     @JsonManagedReference
     private Group group;
 
@@ -44,5 +44,4 @@ public class SubjectClass {
     @JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "subject_class_teacher_fk"), nullable = false)
     @JsonManagedReference
     private Teacher teacher;
-
 }

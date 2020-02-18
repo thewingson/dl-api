@@ -2,7 +2,6 @@ package kz.almat.dlapi.service;
 
 import kz.almat.dlapi.model.Group;
 import kz.almat.dlapi.pojo.GroupPOJO;
-import kz.almat.dlapi.model.Group;
 
 import java.util.List;
 

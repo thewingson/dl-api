@@ -1,5 +1,6 @@
 package kz.almat.dlapi.service.impl;
 
+import kz.almat.dlapi.dto.SubjectClassDTO;
 import kz.almat.dlapi.model.Group;
 import kz.almat.dlapi.model.Subject;
 import kz.almat.dlapi.model.SubjectClass;
@@ -44,9 +45,10 @@ public class SubjectClassServiceImpl implements SubjectClassService {
     }
 
     //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
+    //TODO: Optimize INSERT and SELECT
     @Transactional
     @Override
-    public SubjectClass create(SubjectClassPOJO subjectClassPOJO) {
+    public SubjectClassDTO create(SubjectClassPOJO subjectClassPOJO) {
         Optional<Subject> subject = subjectRepository.findById(subjectClassPOJO.getSubjectId());
         Optional<Group> group = groupRepository.findById(subjectClassPOJO.getGroupId());
         Optional<Teacher> teacher = teacherRepository.findById(subjectClassPOJO.getTeacherId());
@@ -54,7 +56,11 @@ public class SubjectClassServiceImpl implements SubjectClassService {
         subject.ifPresent(subjectClass::setSubject);
         group.ifPresent(subjectClass::setGroup);
         teacher.ifPresent(subjectClass::setTeacher);
-        return subjectClassRepository.save(subjectClass);
+        SubjectClass savedSubjectClass = subjectClassRepository.save(subjectClass);
+        return new SubjectClassDTO(savedSubjectClass.getId(),
+                    savedSubjectClass.getSubject().getId(), savedSubjectClass.getSubject().getName(),
+                    savedSubjectClass.getGroup().getId(), savedSubjectClass.getGroup().getGrade().toString() + savedSubjectClass.getGroup().getListNumber(),
+                    savedSubjectClass.getTeacher().getId(), savedSubjectClass.getTeacher().getLastName() + " " + savedSubjectClass.getTeacher().getFirstName());
     }
 
     //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
