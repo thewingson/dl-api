@@ -20,8 +20,11 @@ public class SubjectClassDTO {
     private Long subjectId;
     private String subjectName;
     private Long groupId;
-    private String groupFullNumber;
+    private Long groupGrade;
+    private Long groupNumber;
     private Long teacherId;
-    private String teacherFullName;
+    private String teacherFirstName;
+    private String teacherLastName;
+    private String teacherMiddleName;
 
 }

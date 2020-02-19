@@ -6,6 +6,7 @@ import kz.almat.dlapi.pojo.SubjectClassPOJO;
 import kz.almat.dlapi.repository.SubjectClassRepository;
 import kz.almat.dlapi.service.SubjectClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,27 +33,27 @@ public class SubjectClassRest {
 
     //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
-    public List<SubjectClass> getAll() {
-        return subjectClassRepository.findAll();
+    public List<SubjectClassDTO> getAll() {
+        return subjectClassRepository.findAllConvertedToDTO();
     }
 
     @GetMapping("{id}")
-    public Optional<SubjectClass> getOne(@PathVariable("id") Long id) {
-        return subjectClassRepository.findById(id);
+    public Optional<SubjectClassDTO> getOne(@PathVariable("id") Long id) {
+        return subjectClassRepository.findByIdConvertedToDTO(id);
     }
 
     @PostMapping
-    public SubjectClassDTO add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
+    public ResponseEntity<SubjectClass> add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
         return subjectClassService.create(subjectClassPOJO);
     }
 
     @PostMapping("/all")
-    public List<SubjectClass> addAll(@RequestBody List<SubjectClassPOJO> subjectClassPOJOS) {
+    public ResponseEntity<SubjectClass> addAll(@RequestBody List<SubjectClassPOJO> subjectClassPOJOS) {
         return subjectClassService.createAll(subjectClassPOJOS);
     }
 
     @PutMapping
-    public SubjectClass edit(@RequestBody SubjectClassPOJO subjectClassPOJO) {
+    public ResponseEntity<SubjectClass> edit(@RequestBody SubjectClassPOJO subjectClassPOJO) {
         return subjectClassService.update(subjectClassPOJO);
     }
 

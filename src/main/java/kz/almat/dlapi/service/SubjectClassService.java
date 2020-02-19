@@ -1,8 +1,8 @@
 package kz.almat.dlapi.service;
 
-import kz.almat.dlapi.dto.SubjectClassDTO;
 import kz.almat.dlapi.model.SubjectClass;
 import kz.almat.dlapi.pojo.SubjectClassPOJO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import java.util.List;
  * Service for {@link SubjectClass}
  */
 public interface SubjectClassService {
-    SubjectClassDTO create(SubjectClassPOJO subjectClassPOJO);
-    List<SubjectClass> createAll(List<SubjectClassPOJO> subjectClassPOJOS);
-    SubjectClass update(SubjectClassPOJO subjectClassPOJO);
+    ResponseEntity<SubjectClass> create(SubjectClassPOJO subjectClassPOJO);
+    ResponseEntity<SubjectClass> createAll(List<SubjectClassPOJO> subjectClassPOJOS);
+    ResponseEntity<SubjectClass> update(SubjectClassPOJO subjectClassPOJO);
     void delete(Long id);
 }
