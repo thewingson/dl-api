@@ -13,6 +13,6 @@ import java.util.List;
 public interface FacultyService {
     Faculty create(FacultyPOJO facultyPOJO);
     List<Faculty> createAll(List<FacultyPOJO> facultyPOJOS);
-    Faculty update(FacultyPOJO facultyPOJOS);
+    Faculty update(FacultyPOJO facultyPOJO);
     void delete(Long id);
 }

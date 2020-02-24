@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author almat_rakhmetolla on 17.02.2020
- * <p>
+ *
  * Implementation of service {@link SubjectClassService}
  */
 
