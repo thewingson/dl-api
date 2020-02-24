@@ -44,6 +44,7 @@ public class SubjectClassServiceImpl implements SubjectClassService {
     //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
     //TODO: Optimize INSERT and SELECT
     //TODO: Check for unique
+    //TODO: Exception Handling via Spring Annotation
     @Transactional
     @Override
     public ResponseEntity<SubjectClass> create(SubjectClassPOJO subjectClassPOJO) {

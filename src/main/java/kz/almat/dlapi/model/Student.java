@@ -1,12 +1,15 @@
 package kz.almat.dlapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author almat_rakhmetolla on 17.02.2020
@@ -42,6 +45,10 @@ public class Student {
     @JoinColumn(name = "group_id", foreignKey = @ForeignKey(name = "student_group_fk"), nullable = false)
     @JsonManagedReference
     private Group group;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    private Set<Answer> answers = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

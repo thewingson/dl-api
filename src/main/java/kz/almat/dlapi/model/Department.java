@@ -18,7 +18,10 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "department")
+@Table(name = "department",
+        uniqueConstraints = {
+        @UniqueConstraint(name = "unique_code", columnNames = "code")
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +35,7 @@ public class Department {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "code", nullable = false, unique = true)
+    @Column(name = "code", nullable = false)
     private String code;
 
     @ManyToOne

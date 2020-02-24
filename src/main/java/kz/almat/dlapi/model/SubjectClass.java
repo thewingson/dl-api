@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author almat_rakhmetolla on 17.02.2020
@@ -44,4 +47,26 @@ public class SubjectClass {
     @JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "subject_class_teacher_fk"), nullable = false)
     @JsonManagedReference
     private Teacher teacher;
+
+    @ManyToMany
+    @JoinTable(name = "task_subject_class",
+            joinColumns = { @JoinColumn(name = "subject_class_id", foreignKey = @ForeignKey(name = "task_subject_class_task_fk")) },
+            inverseJoinColumns = { @JoinColumn(name = "task_id", foreignKey = @ForeignKey(name = "task_subject_class_subject_class_fk")) })
+    private Set<Task> tasks = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SubjectClass that = (SubjectClass) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(subject, that.subject) &&
+                Objects.equals(group, that.group) &&
+                Objects.equals(teacher, that.teacher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, subject, group, teacher);
+    }
 }
