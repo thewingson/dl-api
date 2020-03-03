@@ -39,7 +39,10 @@ public class Answer {
     @JsonManagedReference
     private Task task;
 
-    @OneToOne(mappedBy = "answer")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "message", column = @Column(name = "message"))
+    })
     private AnswerDetail answerDetail;
 
     @Override

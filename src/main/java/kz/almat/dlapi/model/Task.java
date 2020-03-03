@@ -31,7 +31,12 @@ public class Task {
     @Column(name = "value", nullable = false)
     private Integer value;
 
-    @OneToOne(mappedBy = "task")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "topic", column = @Column(name = "topic")),
+            @AttributeOverride( name = "description", column = @Column(name = "description")),
+            @AttributeOverride( name = "deadline", column = @Column(name = "deadline"))
+    })
     private TaskDetail taskDetail;
 
     @ManyToMany(mappedBy = "tasks")

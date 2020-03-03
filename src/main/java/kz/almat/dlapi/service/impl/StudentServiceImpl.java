@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
     //TODO: POJO parsing to Aspects. Create Student from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Student update(StudentPOJO studentPOJO) {
+    public Student update(Long id, StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
         Student student = new Student();
         student.setId(studentPOJO.getId());

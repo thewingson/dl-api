@@ -50,9 +50,10 @@ public class SubjectRest {
         return subjectService.createAll(subjectPOJOS);
     }
 
-    @PutMapping
-    public Subject edit(@RequestBody SubjectPOJO subjectPOJO) {
-        return subjectService.update(subjectPOJO);
+    @PutMapping("{id}")
+    public Subject edit(@PathVariable("id") Long id,
+                        @RequestBody SubjectPOJO subjectPOJO) {
+        return subjectService.update(id, subjectPOJO);
     }
 
     @DeleteMapping("{id}")

@@ -65,7 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
     //TODO: POJO parsing to Aspects. Create Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Teacher update(TeacherPOJO teacherPOJO) {
+    public Teacher update(Long id, TeacherPOJO teacherPOJO) {
         Optional<Department> department = departmentRepository.findById(teacherPOJO.getDepartmentId());
         Teacher teacher = new Teacher();
         teacher.setId(teacherPOJO.getId());

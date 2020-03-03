@@ -50,9 +50,10 @@ public class TeacherRest {
         return teacherService.createAll(teacherPOJOS);
     }
 
-    @PutMapping
-    public Teacher edit(@RequestBody TeacherPOJO teacherPOJO) {
-        return teacherService.update(teacherPOJO);
+    @PutMapping("{id}")
+    public Teacher edit(@PathVariable("id") Long id,
+                        @RequestBody TeacherPOJO teacherPOJO) {
+        return teacherService.update(id, teacherPOJO);
     }
 
     @DeleteMapping("{id}")

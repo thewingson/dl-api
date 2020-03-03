@@ -50,9 +50,10 @@ public class GroupRest {
         return groupService.createAll(groupPOJOS);
     }
 
-    @PutMapping
-    public Group edit(@RequestBody GroupPOJO groupPOJOS) {
-        return groupService.update(groupPOJOS);
+    @PutMapping("{id}")
+    public Group edit(@PathVariable("id") Long id,
+                      @RequestBody GroupPOJO groupPOJOS) {
+        return groupService.update(id, groupPOJOS);
     }
 
     @DeleteMapping("{id}")

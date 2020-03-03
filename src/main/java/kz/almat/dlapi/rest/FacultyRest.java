@@ -49,9 +49,10 @@ public class FacultyRest {
         return facultyService.createAll(facultyPOJOS);
     }
 
-    @PutMapping
-    public Faculty edit(@RequestBody FacultyPOJO facultyPOJO) {
-        return facultyService.update(facultyPOJO);
+    @PutMapping("{id}")
+    public Faculty edit(@PathVariable("id") Long id,
+                        @RequestBody FacultyPOJO facultyPOJO) {
+        return facultyService.update(id, facultyPOJO);
     }
 
     @DeleteMapping("{id}")

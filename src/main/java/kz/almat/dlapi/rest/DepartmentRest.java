@@ -51,9 +51,10 @@ public class DepartmentRest {
         return departmentService.createAll(departmentPOJOS);
     }
 
-    @PutMapping
-    public Department edit(@RequestBody DepartmentPOJO departmentPOJOS) {
-        return departmentService.update(departmentPOJOS);
+    @PutMapping("{id}")
+    public Department edit(@PathVariable("id") Long id,
+                           @RequestBody DepartmentPOJO departmentPOJOS) {
+        return departmentService.update(id, departmentPOJOS);
     }
 
     @DeleteMapping("{id}")

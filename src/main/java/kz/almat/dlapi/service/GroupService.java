@@ -13,6 +13,6 @@ import java.util.List;
 public interface GroupService {
     Group create(GroupPOJO groupPOJO);
     List<Group> createAll(List<GroupPOJO> groupPOJOS);
-    Group update(GroupPOJO groupPOJO);
+    Group update(Long id, GroupPOJO groupPOJO);
     void delete(Long id);
 }

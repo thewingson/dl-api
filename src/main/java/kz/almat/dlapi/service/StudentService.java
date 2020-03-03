@@ -13,6 +13,6 @@ import java.util.List;
 public interface StudentService {
     Student create(StudentPOJO studentPOJO);
     List<Student> createAll(List<StudentPOJO> studentPOJOS);
-    Student update(StudentPOJO studentPOJO);
+    Student update(Long id, StudentPOJO studentPOJO);
     void delete(Long id);
 }

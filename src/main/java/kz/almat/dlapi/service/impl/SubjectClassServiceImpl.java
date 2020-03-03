@@ -75,7 +75,7 @@ public class SubjectClassServiceImpl implements SubjectClassService {
     //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public ResponseEntity<SubjectClass> update(SubjectClassPOJO subjectClassPOJO) {
+    public ResponseEntity<SubjectClass> update(Long id, SubjectClassPOJO subjectClassPOJO) {
         try {
             subjectClassRepository.updateById(subjectClassPOJO.getSubjectId(),
                     subjectClassPOJO.getGroupId(),

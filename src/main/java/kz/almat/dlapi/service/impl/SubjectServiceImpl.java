@@ -52,7 +52,7 @@ public class SubjectServiceImpl implements SubjectService{
     //TODO: POJO parsing to Aspects. Create Subject from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Subject update(SubjectPOJO subjectPOJO) {
+    public Subject update(Long id, SubjectPOJO subjectPOJO) {
         Subject subject = new Subject();
         subject.setId(subjectPOJO.getId());
         subject.setName(subjectPOJO.getName());

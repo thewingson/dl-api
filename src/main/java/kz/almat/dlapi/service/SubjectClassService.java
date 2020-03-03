@@ -14,6 +14,6 @@ import java.util.List;
 public interface SubjectClassService {
     ResponseEntity<SubjectClass> create(SubjectClassPOJO subjectClassPOJO);
     ResponseEntity<SubjectClass> createAll(List<SubjectClassPOJO> subjectClassPOJOS);
-    ResponseEntity<SubjectClass> update(SubjectClassPOJO subjectClassPOJO);
+    ResponseEntity<SubjectClass> update(Long id, SubjectClassPOJO subjectClassPOJO);
     void delete(Long id);
 }

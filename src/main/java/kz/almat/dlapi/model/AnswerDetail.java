@@ -13,23 +13,12 @@ import javax.persistence.*;
  */
 
 //TODO: Add field "file"
-@Entity
-@Table(name = "answer_detail")
+    @Embeddable
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnswerDetail {
 
-    @Id
-    @GeneratedValue(generator = "answer_detail_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(sequenceName = "answer_detail_id_seq", name = "answer_detail_seq", allocationSize = 1)
-    private Long id;
-
     @Column(name = "message")
     private String message;
-
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "answer_id", foreignKey = @ForeignKey(name = "answer_detail_answer_fk"), nullable = false)
-    private Answer answer;
-
 }

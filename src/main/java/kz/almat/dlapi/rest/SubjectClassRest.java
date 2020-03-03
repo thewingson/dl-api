@@ -52,9 +52,10 @@ public class SubjectClassRest {
         return subjectClassService.createAll(subjectClassPOJOS);
     }
 
-    @PutMapping
-    public ResponseEntity<SubjectClass> edit(@RequestBody SubjectClassPOJO subjectClassPOJO) {
-        return subjectClassService.update(subjectClassPOJO);
+    @PutMapping("{id}")
+    public ResponseEntity<SubjectClass> edit(@PathVariable("id") Long id,
+                                             @RequestBody SubjectClassPOJO subjectClassPOJO) {
+        return subjectClassService.update(id, subjectClassPOJO);
     }
 
     @DeleteMapping("{id}")

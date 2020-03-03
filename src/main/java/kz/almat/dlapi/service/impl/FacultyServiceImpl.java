@@ -50,7 +50,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     //TODO: POJO parsing to Aspects. Create Faculty from POJO make automated or use constructor.
     @Override
-    public Faculty update(FacultyPOJO facultyPOJO) {
+    public Faculty update(Long id, FacultyPOJO facultyPOJO) {
         Faculty faculty = new Faculty();
         faculty.setId(facultyPOJO.getId());
         faculty.setName(facultyPOJO.getName());

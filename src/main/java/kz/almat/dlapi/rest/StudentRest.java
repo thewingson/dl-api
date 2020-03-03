@@ -50,9 +50,10 @@ public class StudentRest {
         return studentService.createAll(studentPOJOS);
     }
 
-    @PutMapping
-    public Student edit(@RequestBody StudentPOJO studentPOJO) {
-        return studentService.update(studentPOJO);
+    @PutMapping("{id}")
+    public Student edit(@PathVariable("id") Long id,
+                        @RequestBody StudentPOJO studentPOJO) {
+        return studentService.update(id, studentPOJO);
     }
 
     @DeleteMapping("{id}")

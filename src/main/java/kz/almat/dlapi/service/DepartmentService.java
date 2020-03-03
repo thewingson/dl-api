@@ -13,6 +13,6 @@ import java.util.List;
 public interface DepartmentService {
     Department create(DepartmentPOJO departmentPOJO);
     List<Department> createAll(List<DepartmentPOJO> departmentPOJO);
-    Department update(DepartmentPOJO departmentPOJO);
+    Department update(Long id, DepartmentPOJO departmentPOJO);
     void delete(Long id);
 }

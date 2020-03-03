@@ -13,6 +13,6 @@ import java.util.List;
 public interface TeacherService {
     Teacher create(TeacherPOJO teacherPOJO);
     List<Teacher> createAll(List<TeacherPOJO> teacherPOJOS);
-    Teacher update(TeacherPOJO teacherPOJO);
+    Teacher update(Long id, TeacherPOJO teacherPOJO);
     void delete(Long id);
 }

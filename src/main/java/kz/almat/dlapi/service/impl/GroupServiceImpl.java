@@ -63,7 +63,7 @@ public class GroupServiceImpl implements GroupService {
     //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Group update(GroupPOJO groupPOJO) {
+    public Group update(Long id, GroupPOJO groupPOJO) {
         Optional<Department> department = departmentRepository.findById(groupPOJO.getDepartmentId());
         Group group = new Group();
         group.setId(groupPOJO.getId());

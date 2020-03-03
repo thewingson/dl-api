@@ -13,6 +13,6 @@ import java.util.List;
 public interface TaskService {
     Task create(TaskPOJO taskPOJO);
     List<Task> createAll(List<TaskPOJO> taskPOJOS);
-    Task update(TaskPOJO taskPOJO);
+    Task update(Long id, TaskPOJO taskPOJO);
     void delete(Long id);
 }

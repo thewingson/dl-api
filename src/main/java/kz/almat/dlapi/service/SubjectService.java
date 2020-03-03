@@ -13,6 +13,6 @@ import java.util.List;
 public interface SubjectService {
     Subject create(SubjectPOJO subjectPOJO);
     List<Subject> createAll(List<SubjectPOJO> subjectPOJOS);
-    Subject update(SubjectPOJO subjectPOJO);
+    Subject update(Long id, SubjectPOJO subjectPOJO);
     void delete(Long id);
 }

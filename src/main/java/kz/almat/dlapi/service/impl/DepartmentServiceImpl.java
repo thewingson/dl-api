@@ -63,7 +63,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     //TODO: POJO parsing to Aspects. Create Department from POJO make automated.
     @Transactional
     @Override
-    public Department update(DepartmentPOJO departmentPOJO) {
+    public Department update(Long id, DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
         Department department = new Department();
         department.setId(departmentPOJO.getId());
