@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
     public Student update(Long id, StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
         Student student = new Student();
-        student.setId(studentPOJO.getId());
+        student.setId(id);
         student.setFirstName(studentPOJO.getFirstName());
         student.setLastName(studentPOJO.getLastName());
         student.setMiddleName(studentPOJO.getMiddleName());

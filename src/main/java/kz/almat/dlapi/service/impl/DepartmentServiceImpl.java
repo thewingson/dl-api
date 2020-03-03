@@ -66,7 +66,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department update(Long id, DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
         Department department = new Department();
-        department.setId(departmentPOJO.getId());
+        department.setId(id);
         department.setName(departmentPOJO.getName());
         department.setCode(departmentPOJO.getCode());
         faculty.ifPresent(department::setFaculty);

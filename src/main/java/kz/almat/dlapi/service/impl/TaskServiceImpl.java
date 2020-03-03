@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
     public Task update(Long id, TaskPOJO taskPOJO) {
         List<SubjectClass> subjectClasses = subjectClassRepository.findAllById(taskPOJO.getSubjectClasses());
         Task task = new Task();
-        task.setId(taskPOJO.getId());
+        task.setId(id);
         task.setValue(taskPOJO.getValue());
         task.setSubjectClasses(new HashSet<>(subjectClasses));
         task.setTaskDetail(new TaskDetail(taskPOJO.getTopic(), taskPOJO.getDescription(), taskPOJO.getDeadline()));

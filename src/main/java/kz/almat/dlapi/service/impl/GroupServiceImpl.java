@@ -66,7 +66,7 @@ public class GroupServiceImpl implements GroupService {
     public Group update(Long id, GroupPOJO groupPOJO) {
         Optional<Department> department = departmentRepository.findById(groupPOJO.getDepartmentId());
         Group group = new Group();
-        group.setId(groupPOJO.getId());
+        group.setId(id);
         group.setGrade(groupPOJO.getGrade());
         group.setListNumber(groupPOJO.getListNumber());
         department.ifPresent(group::setDepartment);

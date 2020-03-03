@@ -68,7 +68,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher update(Long id, TeacherPOJO teacherPOJO) {
         Optional<Department> department = departmentRepository.findById(teacherPOJO.getDepartmentId());
         Teacher teacher = new Teacher();
-        teacher.setId(teacherPOJO.getId());
+        teacher.setId(id);
         teacher.setFirstName(teacherPOJO.getFirstName());
         teacher.setLastName(teacherPOJO.getLastName());
         teacher.setMiddleName(teacherPOJO.getMiddleName());

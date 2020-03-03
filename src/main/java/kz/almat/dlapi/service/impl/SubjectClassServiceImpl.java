@@ -77,7 +77,7 @@ public class SubjectClassServiceImpl implements SubjectClassService {
     @Override
     public ResponseEntity<SubjectClass> update(Long id, SubjectClassPOJO subjectClassPOJO) {
         try {
-            subjectClassRepository.updateById(subjectClassPOJO.getSubjectId(),
+            subjectClassRepository.updateById(id,
                     subjectClassPOJO.getGroupId(),
                     subjectClassPOJO.getTeacherId(),
                     subjectClassPOJO.getId());

@@ -54,7 +54,7 @@ public class SubjectServiceImpl implements SubjectService{
     @Override
     public Subject update(Long id, SubjectPOJO subjectPOJO) {
         Subject subject = new Subject();
-        subject.setId(subjectPOJO.getId());
+        subject.setId(id);
         subject.setName(subjectPOJO.getName());
         return subjectRepository.save(subject);
     }

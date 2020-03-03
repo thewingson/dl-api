@@ -52,7 +52,7 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public Faculty update(Long id, FacultyPOJO facultyPOJO) {
         Faculty faculty = new Faculty();
-        faculty.setId(facultyPOJO.getId());
+        faculty.setId(id);
         faculty.setName(facultyPOJO.getName());
         return facultyRepository.save(faculty);
     }
