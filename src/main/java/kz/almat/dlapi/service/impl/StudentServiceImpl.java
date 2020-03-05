@@ -36,8 +36,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void create(StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
-        Student student = new Student();
         group.ifPresent(g -> {
+            Student student = new Student();
             student.setGroup(g);
             student.setFirstName(studentPOJO.getFirstName());
             student.setLastName(studentPOJO.getLastName());
@@ -52,8 +52,8 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = new ArrayList<>();
         studentPOJOS.forEach(s -> {
             Optional<Group> group = groupRepository.findById(s.getGroupId());
-            Student student = new Student();
             group.ifPresent(g -> {
+                Student student = new Student();
                 student.setGroup(g);
                 student.setFirstName(s.getFirstName());
                 student.setLastName(s.getLastName());
@@ -68,8 +68,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void update(Long id, StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
-        Student student = new Student();
         group.ifPresent(g -> {
+            Student student = new Student();
             student.setId(id);
             student.setGroup(g);
             student.setFirstName(studentPOJO.getFirstName());

@@ -36,8 +36,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void create(DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
-        Department department = new Department();
         faculty.ifPresent(f -> {
+            Department department = new Department();
             department.setFaculty(f);
             department.setName(departmentPOJO.getName());
             department.setCode(departmentPOJO.getCode());
@@ -51,8 +51,8 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<Department> departments = new ArrayList<>();
         departmentPOJOS.forEach(d -> {
             Optional<Faculty> faculty = facultyRepository.findById(d.getFacultyId());
-            Department department = new Department();
             faculty.ifPresent(f -> {
+                Department department = new Department();
                 department.setFaculty(f);
                 department.setName(d.getName());
                 department.setCode(d.getCode());
@@ -66,8 +66,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void update(Long id, DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
-        Department department = new Department();
         faculty.ifPresent(f -> {
+            Department department = new Department();
             department.setId(id);
             department.setFaculty(f);
             department.setName(departmentPOJO.getName());
