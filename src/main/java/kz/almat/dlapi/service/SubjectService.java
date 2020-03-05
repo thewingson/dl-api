@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Subject}
  */
 public interface SubjectService {
-    Subject create(SubjectPOJO subjectPOJO);
-    List<Subject> createAll(List<SubjectPOJO> subjectPOJOS);
-    Subject update(Long id, SubjectPOJO subjectPOJO);
-    void delete(Long id);
+    void create(SubjectPOJO subjectPOJO);
+    void createAll(List<SubjectPOJO> subjectPOJOS);
+    void update(Long id, SubjectPOJO subjectPOJO);
 }

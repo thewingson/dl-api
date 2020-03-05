@@ -29,7 +29,6 @@ public class SubjectRest {
         this.subjectService = subjectService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Subject> getAll() {
         return subjectRepository.findAll();
@@ -41,27 +40,26 @@ public class SubjectRest {
     }
 
     @PostMapping
-    public Subject add(@RequestBody SubjectPOJO subjectPOJO) {
-        return subjectService.create(subjectPOJO);
+    public void add(@RequestBody SubjectPOJO subjectPOJO) {
+        subjectService.create(subjectPOJO);
     }
 
     @PostMapping("/all")
-    public List<Subject> addAll(@RequestBody List<SubjectPOJO> subjectPOJOS) {
-        return subjectService.createAll(subjectPOJOS);
+    public void addAll(@RequestBody List<SubjectPOJO> subjectPOJOS) {
+        subjectService.createAll(subjectPOJOS);
     }
 
     @PutMapping("{id}")
-    public Subject edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                         @RequestBody SubjectPOJO subjectPOJO) {
-        return subjectService.update(id, subjectPOJO);
+        subjectService.update(id, subjectPOJO);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        subjectService.delete(id);
+        subjectRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         subjectRepository.deleteAll();

@@ -27,41 +27,34 @@ public class SubjectServiceImpl implements SubjectService{
         this.subjectRepository = subjectRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Subject from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Subject create(SubjectPOJO subjectPOJO) {
+    public void create(SubjectPOJO subjectPOJO) {
         Subject subject = new Subject();
         subject.setName(subjectPOJO.getName());
-        return subjectRepository.save(subject);
+        subjectRepository.save(subject);
     }
 
-    //TODO: POJO parsing to Aspects. Create Subject from POJO make automated or use constructor.
     @Transactional
     @Override
-    public List<Subject> createAll(List<SubjectPOJO> subjectPOJOS) {
+    public void createAll(List<SubjectPOJO> subjectPOJOS) {
         List<Subject> subjects = new ArrayList<>();
-        for (SubjectPOJO s: subjectPOJOS){
+        subjectPOJOS.forEach(s -> {
             Subject subject = new Subject();
             subject.setName(s.getName());
             subjects.add(subject);
-        }
-        return subjectRepository.saveAll(subjects);
+        });
+        subjectRepository.saveAll(subjects);
     }
 
-    //TODO: POJO parsing to Aspects. Create Subject from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Subject update(Long id, SubjectPOJO subjectPOJO) {
+    public void update(Long id, SubjectPOJO subjectPOJO) {
         Subject subject = new Subject();
         subject.setId(id);
         subject.setName(subjectPOJO.getName());
-        return subjectRepository.save(subject);
+        subjectRepository.save(subject);
     }
 
-    @Override
-    public void delete(Long id) {
-        subjectRepository.deleteById(id);
-    }
 
 }
