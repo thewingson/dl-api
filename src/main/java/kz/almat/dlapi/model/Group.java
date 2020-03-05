@@ -39,7 +39,6 @@ public class Group {
     @Column(name = "list_number")
     private Long listNumber;
 
-
     //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "group_department_fk"), nullable = false)
@@ -59,13 +58,11 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return Objects.equals(id, group.id) &&
-                Objects.equals(grade, group.grade) &&
-                Objects.equals(listNumber, group.listNumber);
+        return Objects.equals(id, group.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, grade, listNumber);
+        return Objects.hash(id);
     }
 }

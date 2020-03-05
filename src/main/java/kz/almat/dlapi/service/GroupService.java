@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Group}
  */
 public interface GroupService {
-    Group create(GroupPOJO groupPOJO);
-    List<Group> createAll(List<GroupPOJO> groupPOJOS);
-    Group update(Long id, GroupPOJO groupPOJO);
-    void delete(Long id);
+    void create(GroupPOJO groupPOJO);
+    void createAll(List<GroupPOJO> groupPOJOS);
+    void update(Long id, GroupPOJO groupPOJO);
 }

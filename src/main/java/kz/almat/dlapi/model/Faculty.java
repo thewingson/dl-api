@@ -30,7 +30,7 @@ public class Faculty {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "faculty", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "faculty", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JsonBackReference
     private Set<Department> departments = new HashSet<>();
 

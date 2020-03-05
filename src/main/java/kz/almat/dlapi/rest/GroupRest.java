@@ -29,7 +29,6 @@ public class GroupRest {
         this.groupService = groupService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Group> getAll() {
         return groupRepository.findAll();
@@ -41,27 +40,26 @@ public class GroupRest {
     }
 
     @PostMapping
-    public Group add(@RequestBody GroupPOJO groupPOJO) {
-        return groupService.create(groupPOJO);
+    public void add(@RequestBody GroupPOJO groupPOJO) {
+        groupService.create(groupPOJO);
     }
 
     @PostMapping("/all")
-    public List<Group> addAll(@RequestBody List<GroupPOJO> groupPOJOS) {
-        return groupService.createAll(groupPOJOS);
+    public void addAll(@RequestBody List<GroupPOJO> groupPOJOS) {
+        groupService.createAll(groupPOJOS);
     }
 
     @PutMapping("{id}")
-    public Group edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                       @RequestBody GroupPOJO groupPOJOS) {
-        return groupService.update(id, groupPOJOS);
+        groupService.update(id, groupPOJOS);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        groupService.delete(id);
+        groupRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         groupRepository.deleteAll();

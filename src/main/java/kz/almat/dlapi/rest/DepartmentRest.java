@@ -17,6 +17,8 @@ import java.util.Optional;
  * Rest for {@link Faculty}
  */
 
+//TODO: Cover responses by ResponseEntity or other response object.
+//TODO: getOne() get rid of Optional via Exception
 @RestController
 @RequestMapping("/department")
 public class DepartmentRest {
@@ -30,7 +32,6 @@ public class DepartmentRest {
         this.departmentService = departmentService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Department> getAll() {
         return departmentRepository.findAll();
@@ -42,27 +43,26 @@ public class DepartmentRest {
     }
 
     @PostMapping
-    public Department add(@RequestBody DepartmentPOJO departmentPOJO) {
-        return departmentService.create(departmentPOJO);
+    public void add(@RequestBody DepartmentPOJO departmentPOJO) {
+        departmentService.create(departmentPOJO);
     }
 
     @PostMapping("/all")
-    public List<Department> addAll(@RequestBody List<DepartmentPOJO> departmentPOJOS) {
-        return departmentService.createAll(departmentPOJOS);
+    public void addAll(@RequestBody List<DepartmentPOJO> departmentPOJOS) {
+        departmentService.createAll(departmentPOJOS);
     }
 
     @PutMapping("{id}")
-    public Department edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                            @RequestBody DepartmentPOJO departmentPOJOS) {
-        return departmentService.update(id, departmentPOJOS);
+        departmentService.update(id, departmentPOJOS);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        departmentService.delete(id);
+        departmentRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         departmentRepository.deleteAll();

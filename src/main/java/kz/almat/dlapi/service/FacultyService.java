@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Faculty}
  */
 public interface FacultyService {
-    Faculty create(FacultyPOJO facultyPOJO);
-    List<Faculty> createAll(List<FacultyPOJO> facultyPOJOS);
-    Faculty update(Long id, FacultyPOJO facultyPOJO);
-    void delete(Long id);
+    void create(FacultyPOJO facultyPOJO);
+    void createAll(List<FacultyPOJO> facultyPOJOS);
+    void update(Long id, FacultyPOJO facultyPOJO);
 }

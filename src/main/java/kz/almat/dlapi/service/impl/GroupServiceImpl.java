@@ -32,49 +32,50 @@ public class GroupServiceImpl implements GroupService {
         this.departmentRepository = departmentRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Group create(GroupPOJO groupPOJO) {
+    public void create(GroupPOJO groupPOJO) {
         Optional<Department> department = departmentRepository.findById(groupPOJO.getDepartmentId());
         Group group = new Group();
-        group.setGrade(groupPOJO.getGrade());
-        group.setListNumber(groupPOJO.getListNumber());
-        department.ifPresent(group::setDepartment);
-        return groupRepository.save(group);
+        department.ifPresent(d -> {
+            group.setDepartment(d);
+            group.setGrade(groupPOJO.getGrade());
+            group.setListNumber(groupPOJO.getListNumber());
+            groupRepository.save(group);
+        });
     }
 
-    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
-    public List<Group> createAll(List<GroupPOJO> groupPOJOS) {
+    public void createAll(List<GroupPOJO> groupPOJOS) {
         List<Group> groups = new ArrayList<>();
-        for (GroupPOJO g: groupPOJOS){
+        groupPOJOS.forEach(g -> {
             Optional<Department> department = departmentRepository.findById(g.getDepartmentId());
             Group group = new Group();
-            group.setGrade(g.getGrade());
-            group.setListNumber(g.getListNumber());
-            department.ifPresent(group::setDepartment);
-            groups.add(group);
-        }
-        return groupRepository.saveAll(groups);
+            department.ifPresent(d -> {
+                group.setDepartment(d);
+                group.setGrade(g.getGrade());
+                group.setListNumber(g.getListNumber());
+                groups.add(group);
+            });
+
+        });
+        groupRepository.saveAll(groups);
     }
 
-    //TODO: POJO parsing to Aspects. Create Group from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Group update(Long id, GroupPOJO groupPOJO) {
+    public void update(Long id, GroupPOJO groupPOJO) {
         Optional<Department> department = departmentRepository.findById(groupPOJO.getDepartmentId());
         Group group = new Group();
-        group.setId(id);
-        group.setGrade(groupPOJO.getGrade());
-        group.setListNumber(groupPOJO.getListNumber());
-        department.ifPresent(group::setDepartment);
-        return groupRepository.save(group);
+        department.ifPresent(d -> {
+            group.setId(id);
+            group.setDepartment(d);
+            group.setGrade(groupPOJO.getGrade());
+            group.setListNumber(groupPOJO.getListNumber());
+            groupRepository.save(group);
+        });
+        groupRepository.save(group);
     }
 
-    @Override
-    public void delete(Long id) {
-        groupRepository.deleteById(id);
-    }
 }

@@ -32,49 +32,47 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.facultyRepository = facultyRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Department create(DepartmentPOJO departmentPOJO) {
+    public void create(DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
         Department department = new Department();
-        department.setName(departmentPOJO.getName());
-        department.setCode(departmentPOJO.getCode());
-        faculty.ifPresent(department::setFaculty);
-        return departmentRepository.save(department);
+        faculty.ifPresent(f -> {
+            department.setFaculty(f);
+            department.setName(departmentPOJO.getName());
+            department.setCode(departmentPOJO.getCode());
+            departmentRepository.save(department);
+        });
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated or use constructor.
     @Transactional
     @Override
-    public List<Department> createAll(List<DepartmentPOJO> departmentPOJO) {
+    public void createAll(List<DepartmentPOJO> departmentPOJOS) {
         List<Department> departments = new ArrayList<>();
-        for (DepartmentPOJO d: departmentPOJO){
+        departmentPOJOS.forEach(d -> {
             Optional<Faculty> faculty = facultyRepository.findById(d.getFacultyId());
             Department department = new Department();
-            department.setName(d.getName());
-            department.setCode(d.getCode());
-            faculty.ifPresent(department::setFaculty);
-            departments.add(department);
-        }
-        return departmentRepository.saveAll(departments);
+            faculty.ifPresent(f -> {
+                department.setFaculty(f);
+                department.setName(d.getName());
+                department.setCode(d.getCode());
+                departments.add(department);
+            });
+        });
+        departmentRepository.saveAll(departments);
     }
 
-    //TODO: POJO parsing to Aspects. Create Department from POJO make automated.
     @Transactional
     @Override
-    public Department update(Long id, DepartmentPOJO departmentPOJO) {
+    public void update(Long id, DepartmentPOJO departmentPOJO) {
         Optional<Faculty> faculty = facultyRepository.findById(departmentPOJO.getFacultyId());
         Department department = new Department();
-        department.setId(id);
-        department.setName(departmentPOJO.getName());
-        department.setCode(departmentPOJO.getCode());
-        faculty.ifPresent(department::setFaculty);
-        return departmentRepository.save(department);
-    }
-
-    @Override
-    public void delete(Long id) {
-        departmentRepository.deleteById(id);
+        faculty.ifPresent(f -> {
+            department.setId(id);
+            department.setFaculty(f);
+            department.setName(departmentPOJO.getName());
+            department.setCode(departmentPOJO.getCode());
+            departmentRepository.save(department);
+        });
     }
 }

@@ -15,6 +15,8 @@ import java.util.Optional;
  *
  * Rest for {@link Faculty}
  */
+
+//TODO: Cover responses by ResponseEntity or other response object.
 @RestController
 @RequestMapping("/faculty")
 public class FacultyRest {
@@ -28,7 +30,7 @@ public class FacultyRest {
         this.facultyService = facultyService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
+
     @GetMapping
     public List<Faculty> getAll() {
         return facultyRepository.findAll();
@@ -40,30 +42,30 @@ public class FacultyRest {
     }
 
     @PostMapping
-    public Faculty add(@RequestBody FacultyPOJO facultyPOJO) {
-        return facultyService.create(facultyPOJO);
+    public void add(@RequestBody FacultyPOJO facultyPOJO) {
+        facultyService.create(facultyPOJO);
     }
 
     @PostMapping("/all")
-    public List<Faculty> addAll(@RequestBody List<FacultyPOJO> facultyPOJOS) {
-        return facultyService.createAll(facultyPOJOS);
+    public void addAll(@RequestBody List<FacultyPOJO> facultyPOJOS) {
+        facultyService.createAll(facultyPOJOS);
     }
 
     @PutMapping("{id}")
-    public Faculty edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                         @RequestBody FacultyPOJO facultyPOJO) {
-        return facultyService.update(id, facultyPOJO);
+        facultyService.update(id, facultyPOJO);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        facultyService.delete(id);
+        facultyRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         facultyRepository.deleteAll();
     }
+
 
 }
