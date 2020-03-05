@@ -39,7 +39,6 @@ public class Group {
     @Column(name = "list_number")
     private Long listNumber;
 
-    //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
     @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "group_department_fk"), nullable = false)
     @JsonManagedReference

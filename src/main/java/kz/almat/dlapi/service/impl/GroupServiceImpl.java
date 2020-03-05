@@ -58,7 +58,6 @@ public class GroupServiceImpl implements GroupService {
                 group.setListNumber(g.getListNumber());
                 groups.add(group);
             });
-
         });
         groupRepository.saveAll(groups);
     }

@@ -1,5 +1,6 @@
 package kz.almat.dlapi.rest;
 
+import kz.almat.dlapi.dto.GroupDTO;
 import kz.almat.dlapi.model.Group;
 import kz.almat.dlapi.pojo.GroupPOJO;
 import kz.almat.dlapi.repository.GroupRepository;
@@ -30,13 +31,13 @@ public class GroupRest {
     }
 
     @GetMapping
-    public List<Group> getAll() {
-        return groupRepository.findAll();
+    public List<GroupDTO> getAll() {
+        return groupRepository.findAllConvertedToDTO();
     }
 
     @GetMapping("{id}")
-    public Optional<Group> getOne(@PathVariable("id") Long id) {
-        return groupRepository.findById(id);
+    public Optional<GroupDTO> getOne(@PathVariable("id") Long id) {
+        return groupRepository.findByIdConvertedToDTO(id);
     }
 
     @PostMapping
