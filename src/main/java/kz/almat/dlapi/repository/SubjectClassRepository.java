@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +55,7 @@ public interface SubjectClassRepository extends JpaRepository<SubjectClass, Long
             nativeQuery = true)
     void saveByIDs(@Param("subjectId") Long subjectId,
                    @Param("groupId") Long groupId,
-                   @Param("teacherId") Long teacherId) throws SQLException;
+                   @Param("teacherId") Long teacherId);
 
     @Modifying
     @Query(value = "update almat.subject_class sc " +
@@ -68,6 +67,6 @@ public interface SubjectClassRepository extends JpaRepository<SubjectClass, Long
     void updateById(@Param("subjectId") Long subjectId,
                    @Param("groupId") Long groupId,
                    @Param("teacherId") Long teacherId,
-                   @Param("id") Long id) throws SQLException;
+                   @Param("id") Long id);
 
 }

@@ -6,7 +6,6 @@ import kz.almat.dlapi.pojo.SubjectClassPOJO;
 import kz.almat.dlapi.repository.SubjectClassRepository;
 import kz.almat.dlapi.service.SubjectClassService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +30,7 @@ public class SubjectClassRest {
         this.subjectClassService = subjectClassService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
-    @GetMapping
+    //TODO: Cover responses by ResponseEntity or other response object.    @GetMapping
     public List<SubjectClassDTO> getAll() {
         return subjectClassRepository.findAllConvertedToDTO();
     }
@@ -43,27 +41,26 @@ public class SubjectClassRest {
     }
 
     @PostMapping
-    public ResponseEntity<SubjectClass> add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
-        return subjectClassService.create(subjectClassPOJO);
+    public void add(@RequestBody SubjectClassPOJO subjectClassPOJO) {
+        subjectClassService.create(subjectClassPOJO);
     }
 
     @PostMapping("/all")
-    public ResponseEntity<SubjectClass> addAll(@RequestBody List<SubjectClassPOJO> subjectClassPOJOS) {
-        return subjectClassService.createAll(subjectClassPOJOS);
+    public void addAll(@RequestBody List<SubjectClassPOJO> subjectClassPOJOS) {
+        subjectClassService.createAll(subjectClassPOJOS);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<SubjectClass> edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                                              @RequestBody SubjectClassPOJO subjectClassPOJO) {
-        return subjectClassService.update(id, subjectClassPOJO);
+        subjectClassService.update(id, subjectClassPOJO);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        subjectClassService.delete(id);
+        subjectClassRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         subjectClassRepository.deleteAll();

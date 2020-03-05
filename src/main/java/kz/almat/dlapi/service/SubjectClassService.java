@@ -12,8 +12,7 @@ import java.util.List;
  * Service for {@link SubjectClass}
  */
 public interface SubjectClassService {
-    ResponseEntity<SubjectClass> create(SubjectClassPOJO subjectClassPOJO);
-    ResponseEntity<SubjectClass> createAll(List<SubjectClassPOJO> subjectClassPOJOS);
-    ResponseEntity<SubjectClass> update(Long id, SubjectClassPOJO subjectClassPOJO);
-    void delete(Long id);
+    void create(SubjectClassPOJO subjectClassPOJO);
+    void createAll(List<SubjectClassPOJO> subjectClassPOJOS);
+    void update(Long id, SubjectClassPOJO subjectClassPOJO);
 }

@@ -1,6 +1,5 @@
 package kz.almat.dlapi.service.impl;
 
-import kz.almat.dlapi.model.SubjectClass;
 import kz.almat.dlapi.pojo.SubjectClassPOJO;
 import kz.almat.dlapi.repository.GroupRepository;
 import kz.almat.dlapi.repository.SubjectClassRepository;
@@ -8,20 +7,18 @@ import kz.almat.dlapi.repository.SubjectRepository;
 import kz.almat.dlapi.repository.TeacherRepository;
 import kz.almat.dlapi.service.SubjectClassService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * @author almat_rakhmetolla on 17.02.2020
- *
+ * <p>
  * Implementation of service {@link SubjectClassService}
  */
 
+//TODO: Exception Handling, and via Spring Annotation
 @Service
 public class SubjectClassServiceImpl implements SubjectClassService {
 
@@ -41,55 +38,27 @@ public class SubjectClassServiceImpl implements SubjectClassService {
         this.teacherRepository = teacherRepository;
     }
 
-    //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
-    //TODO: Optimize INSERT and SELECT
-    //TODO: Check for unique
-    //TODO: Exception Handling via Spring Annotation
     @Transactional
     @Override
-    public ResponseEntity<SubjectClass> create(SubjectClassPOJO subjectClassPOJO) {
-        try {
-            subjectClassRepository.saveByIDs(subjectClassPOJO.getSubjectId(), subjectClassPOJO.getGroupId(), subjectClassPOJO.getTeacherId());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+    public void create(SubjectClassPOJO subjectClassPOJO) {
+        subjectClassRepository.saveByIDs(subjectClassPOJO.getSubjectId(), subjectClassPOJO.getGroupId(), subjectClassPOJO.getTeacherId());
     }
 
-    //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public ResponseEntity<SubjectClass> createAll(List<SubjectClassPOJO> subjectClassPOJOS) {
+    public void createAll(List<SubjectClassPOJO> subjectClassPOJOS) {
         for (SubjectClassPOJO s : subjectClassPOJOS) {
-            try {
-                subjectClassRepository.saveByIDs(s.getSubjectId(), s.getGroupId(), s.getTeacherId());
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            }
+            subjectClassRepository.saveByIDs(s.getSubjectId(), s.getGroupId(), s.getTeacherId());
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //TODO: POJO parsing to Aspects. SubjectClass Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public ResponseEntity<SubjectClass> update(Long id, SubjectClassPOJO subjectClassPOJO) {
-        try {
-            subjectClassRepository.updateById(id,
-                    subjectClassPOJO.getGroupId(),
-                    subjectClassPOJO.getTeacherId(),
-                    subjectClassPOJO.getId());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+    public void update(Long id, SubjectClassPOJO subjectClassPOJO) {
+        subjectClassRepository.updateById(id,
+                subjectClassPOJO.getGroupId(),
+                subjectClassPOJO.getTeacherId(),
+                subjectClassPOJO.getId());
     }
 
-    @Override
-    public void delete(Long id) {
-        subjectClassRepository.deleteById(id);
-    }
 }
