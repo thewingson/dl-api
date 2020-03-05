@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Teacher}
  */
 public interface TeacherService {
-    Teacher create(TeacherPOJO teacherPOJO);
-    List<Teacher> createAll(List<TeacherPOJO> teacherPOJOS);
-    Teacher update(Long id, TeacherPOJO teacherPOJO);
-    void delete(Long id);
+    void create(TeacherPOJO teacherPOJO);
+    void createAll(List<TeacherPOJO> teacherPOJOS);
+    void update(Long id, TeacherPOJO teacherPOJO);
 }

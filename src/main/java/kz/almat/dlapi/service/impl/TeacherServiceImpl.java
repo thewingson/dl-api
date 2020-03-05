@@ -32,53 +32,51 @@ public class TeacherServiceImpl implements TeacherService {
         this.departmentRepository = departmentRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Teacher create(TeacherPOJO teacherPOJO) {
+    public void create(TeacherPOJO teacherPOJO) {
         Optional<Department> department = departmentRepository.findById(teacherPOJO.getDepartmentId());
-        Teacher teacher = new Teacher();
-        teacher.setFirstName(teacherPOJO.getFirstName());
-        teacher.setLastName(teacherPOJO.getLastName());
-        teacher.setMiddleName(teacherPOJO.getMiddleName());
-        department.ifPresent(teacher::setDepartment);
-        return teacherRepository.save(teacher);
-    }
-
-    //TODO: POJO parsing to Aspects. Create Teacher from POJO make automated or use constructor.
-    @Transactional
-    @Override
-    public List<Teacher> createAll(List<TeacherPOJO> teacherPOJOS) {
-        List<Teacher> teachers = new ArrayList<>();
-        for (TeacherPOJO t: teacherPOJOS){
-            Optional<Department> department = departmentRepository.findById(t.getDepartmentId());
+        department.ifPresent(d -> {
             Teacher teacher = new Teacher();
-            teacher.setFirstName(t.getFirstName());
-            teacher.setLastName(t.getLastName());
-            teacher.setMiddleName(t.getMiddleName());
-            department.ifPresent(teacher::setDepartment);
-            teachers.add(teacher);
-        }
-        return teacherRepository.saveAll(teachers);
+            teacher.setDepartment(d);
+            teacher.setFirstName(teacherPOJO.getFirstName());
+            teacher.setLastName(teacherPOJO.getLastName());
+            teacher.setMiddleName(teacherPOJO.getMiddleName());
+            teacherRepository.save(teacher);
+        });
     }
 
-    //TODO: POJO parsing to Aspects. Create Teacher from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Teacher update(Long id, TeacherPOJO teacherPOJO) {
-        Optional<Department> department = departmentRepository.findById(teacherPOJO.getDepartmentId());
-        Teacher teacher = new Teacher();
-        teacher.setId(id);
-        teacher.setFirstName(teacherPOJO.getFirstName());
-        teacher.setLastName(teacherPOJO.getLastName());
-        teacher.setMiddleName(teacherPOJO.getMiddleName());
-        department.ifPresent(teacher::setDepartment);
-        return teacherRepository.save(teacher);
+    public void createAll(List<TeacherPOJO> teacherPOJOS) {
+        List<Teacher> teachers = new ArrayList<>();
+        teacherPOJOS.forEach(t -> {
+            Optional<Department> department = departmentRepository.findById(t.getDepartmentId());
+            department.ifPresent(d -> {
+                Teacher teacher = new Teacher();
+                teacher.setDepartment(d);
+                teacher.setFirstName(t.getFirstName());
+                teacher.setLastName(t.getLastName());
+                teacher.setMiddleName(t.getMiddleName());
+                teachers.add(teacher);
+            });
+        });
+        teacherRepository.saveAll(teachers);
     }
 
+    @Transactional
     @Override
-    public void delete(Long id) {
-        teacherRepository.deleteById(id);
+    public void update(Long id, TeacherPOJO teacherPOJO) {
+        Optional<Department> department = departmentRepository.findById(teacherPOJO.getDepartmentId());
+        department.ifPresent(d -> {
+            Teacher teacher = new Teacher();
+            teacher.setId(id);
+            teacher.setDepartment(d);
+            teacher.setFirstName(teacherPOJO.getFirstName());
+            teacher.setLastName(teacherPOJO.getLastName());
+            teacher.setMiddleName(teacherPOJO.getMiddleName());
+            teacherRepository.save(teacher);
+        });
     }
 
 }

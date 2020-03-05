@@ -1,5 +1,6 @@
 package kz.almat.dlapi.rest;
 
+import kz.almat.dlapi.dto.TeacherDTO;
 import kz.almat.dlapi.model.Teacher;
 import kz.almat.dlapi.pojo.TeacherPOJO;
 import kz.almat.dlapi.repository.TeacherRepository;
@@ -29,39 +30,37 @@ public class TeacherRest {
         this.teacherService = teacherService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
-    public List<Teacher> getAll() {
-        return teacherRepository.findAll();
+    public List<TeacherDTO> getAll() {
+        return teacherRepository.findAllConvertedToDTO();
     }
 
     @GetMapping("{id}")
-    public Optional<Teacher> getOne(@PathVariable("id") Long id) {
-        return teacherRepository.findById(id);
+    public Optional<TeacherDTO> getOne(@PathVariable("id") Long id) {
+        return teacherRepository.findByIdConvertedToDTO(id);
     }
 
     @PostMapping
-    public Teacher add(@RequestBody TeacherPOJO teacherPOJO) {
-        return teacherService.create(teacherPOJO);
+    public void add(@RequestBody TeacherPOJO teacherPOJO) {
+        teacherService.create(teacherPOJO);
     }
 
     @PostMapping("/all")
-    public List<Teacher> addAll(@RequestBody List<TeacherPOJO> teacherPOJOS) {
-        return teacherService.createAll(teacherPOJOS);
+    public void addAll(@RequestBody List<TeacherPOJO> teacherPOJOS) {
+        teacherService.createAll(teacherPOJOS);
     }
 
     @PutMapping("{id}")
-    public Teacher edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                         @RequestBody TeacherPOJO teacherPOJO) {
-        return teacherService.update(id, teacherPOJO);
+        teacherService.update(id, teacherPOJO);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        teacherService.delete(id);
+        teacherRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         teacherRepository.deleteAll();
