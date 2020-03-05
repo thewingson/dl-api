@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Answer}
  */
 public interface AnswerService {
-    Answer create(AnswerPOJO answerPOJO);
-    List<Answer> createAll(List<AnswerPOJO> answerPOJOS);
-    Answer update(Long id, AnswerPOJO answerPOJO);
-    void delete(Long id);
+    void create(AnswerPOJO answerPOJO);
+    void createAll(List<AnswerPOJO> answerPOJOS);
+    void update(Long id, AnswerPOJO answerPOJO);
 }

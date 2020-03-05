@@ -50,13 +50,11 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer answer = (Answer) o;
-        return Objects.equals(id, answer.id) &&
-                Objects.equals(student, answer.student) &&
-                Objects.equals(task, answer.task);
+        return Objects.equals(id, answer.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, student, task);
+        return Objects.hash(id);
     }
 }
