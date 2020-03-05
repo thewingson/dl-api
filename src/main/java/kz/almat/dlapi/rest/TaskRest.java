@@ -29,7 +29,6 @@ public class TaskRest {
         this.taskService = taskService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.
     @GetMapping
     public List<Task> getAll() {
         return taskRepository.findAll();
@@ -41,27 +40,26 @@ public class TaskRest {
     }
 
     @PostMapping
-    public Task add(@RequestBody TaskPOJO taskPOJO) {
-        return taskService.create(taskPOJO);
+    public void add(@RequestBody TaskPOJO taskPOJO) {
+        taskService.create(taskPOJO);
     }
 
     @PostMapping("/all")
-    public List<Task> addAll(@RequestBody List<TaskPOJO> taskPOJOS) {
-        return taskService.createAll(taskPOJOS);
+    public void addAll(@RequestBody List<TaskPOJO> taskPOJOS) {
+        taskService.createAll(taskPOJOS);
     }
 
     @PutMapping("{id}")
-    public Task edit(@PathVariable("id") Long id,
+    public void edit(@PathVariable("id") Long id,
                      @RequestBody TaskPOJO taskPOJO) {
-        return taskService.update(id, taskPOJO);
+        taskService.update(id, taskPOJO);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Long id) {
-        taskService.delete(id);
+        taskRepository.deleteById(id);
     }
 
-    //TODO: Move it to service layer. Check if CrudRepository.deleteAll() method is transactional or not.
     @DeleteMapping("/all")
     public void deleteAll() {
         taskRepository.deleteAll();

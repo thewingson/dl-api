@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Task}
  */
 public interface TaskService {
-    Task create(TaskPOJO taskPOJO);
-    List<Task> createAll(List<TaskPOJO> taskPOJOS);
-    Task update(Long id, TaskPOJO taskPOJO);
-    void delete(Long id);
+    void create(TaskPOJO taskPOJO);
+    void createAll(List<TaskPOJO> taskPOJOS);
+    void update(Long id, TaskPOJO taskPOJO);
 }

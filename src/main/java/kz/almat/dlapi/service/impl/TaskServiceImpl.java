@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
-    public Task create(TaskPOJO taskPOJO) {
+    public void create(TaskPOJO taskPOJO) {
         List<SubjectClass> subjectClasses = subjectClassRepository.findAllById(taskPOJO.getSubjectClasses());
         TaskDetail taskDetail = new TaskDetail();
         taskDetail.setTopic(taskPOJO.getTopic());
@@ -47,44 +47,38 @@ public class TaskServiceImpl implements TaskService {
         task.setValue(taskPOJO.getValue());
         task.setSubjectClasses(new HashSet<>(subjectClasses));
         task.setTaskDetail(taskDetail);
-        return taskRepository.save(task);
+        taskRepository.save(task);
     }
 
     @Transactional
     @Override
-    public List<Task> createAll(List<TaskPOJO> taskPOJOS) {
+    public void createAll(List<TaskPOJO> taskPOJOS) {
         List<Task> tasks = new ArrayList<>();
-        for (TaskPOJO t : taskPOJOS) {
+        taskPOJOS.forEach(t -> {
             List<SubjectClass> subjectClasses = subjectClassRepository.findAllById(t.getSubjectClasses());
             TaskDetail taskDetail = new TaskDetail();
             taskDetail.setTopic(t.getTopic());
             taskDetail.setDescription(t.getDescription());
             taskDetail.setDeadline(t.getDeadline());
-
             Task task = new Task();
             task.setValue(t.getValue());
             task.setSubjectClasses(new HashSet<>(subjectClasses));
             task.setTaskDetail(taskDetail);
             tasks.add(task);
-        }
-        return taskRepository.saveAll(tasks);
+        });
+        taskRepository.saveAll(tasks);
     }
 
     @Transactional
     @Override
-    public Task update(Long id, TaskPOJO taskPOJO) {
+    public void update(Long id, TaskPOJO taskPOJO) {
         List<SubjectClass> subjectClasses = subjectClassRepository.findAllById(taskPOJO.getSubjectClasses());
         Task task = new Task();
         task.setId(id);
         task.setValue(taskPOJO.getValue());
         task.setSubjectClasses(new HashSet<>(subjectClasses));
         task.setTaskDetail(new TaskDetail(taskPOJO.getTopic(), taskPOJO.getDescription(), taskPOJO.getDeadline()));
-        return taskRepository.save(task);
+        taskRepository.save(task);
     }
 
-    @Transactional
-    @Override
-    public void delete(Long id) {
-        taskRepository.deleteById(id);
-    }
 }
