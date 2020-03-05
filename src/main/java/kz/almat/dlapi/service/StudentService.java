@@ -11,8 +11,7 @@ import java.util.List;
  * Service for {@link Student}
  */
 public interface StudentService {
-    Student create(StudentPOJO studentPOJO);
-    List<Student> createAll(List<StudentPOJO> studentPOJOS);
-    Student update(Long id, StudentPOJO studentPOJO);
-    void delete(Long id);
+    void create(StudentPOJO studentPOJO);
+    void createAll(List<StudentPOJO> studentPOJOS);
+    void update(Long id, StudentPOJO studentPOJO);
 }

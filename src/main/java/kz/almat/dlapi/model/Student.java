@@ -39,8 +39,6 @@ public class Student {
     @Column(name = "middle_name", nullable = false)
     private String middleName;
 
-
-    //TODO: add JSON limits to lazy initialization. E.g. when you retrieve Group, it also takes related Department. Department takes Faculty. Too many @ManyToOne-s.
     @ManyToOne
     @JoinColumn(name = "group_id", foreignKey = @ForeignKey(name = "student_group_fk"), nullable = false)
     @JsonManagedReference
@@ -55,14 +53,11 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id) &&
-                Objects.equals(firstName, student.firstName) &&
-                Objects.equals(lastName, student.lastName) &&
-                Objects.equals(middleName, student.middleName);
+        return Objects.equals(id, student.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, middleName);
+        return Objects.hash(id);
     }
 }

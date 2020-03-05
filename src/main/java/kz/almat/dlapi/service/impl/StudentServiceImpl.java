@@ -32,52 +32,50 @@ public class StudentServiceImpl implements StudentService {
         this.groupRepository = groupRepository;
     }
 
-    //TODO: POJO parsing to Aspects. Create Student from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Student create(StudentPOJO studentPOJO) {
+    public void create(StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
         Student student = new Student();
-        student.setFirstName(studentPOJO.getFirstName());
-        student.setLastName(studentPOJO.getLastName());
-        student.setMiddleName(studentPOJO.getMiddleName());
-        group.ifPresent(student::setGroup);
-        return studentRepository.save(student);
+        group.ifPresent(g -> {
+            student.setGroup(g);
+            student.setFirstName(studentPOJO.getFirstName());
+            student.setLastName(studentPOJO.getLastName());
+            student.setMiddleName(studentPOJO.getMiddleName());
+            studentRepository.save(student);
+        });
     }
 
-    //TODO: POJO parsing to Aspects. Create Student from POJO make automated or use constructor.
     @Transactional
     @Override
-    public List<Student> createAll(List<StudentPOJO> studentPOJOS) {
+    public void createAll(List<StudentPOJO> studentPOJOS) {
         List<Student> students = new ArrayList<>();
-        for (StudentPOJO s: studentPOJOS){
+        studentPOJOS.forEach(s -> {
             Optional<Group> group = groupRepository.findById(s.getGroupId());
             Student student = new Student();
-            student.setFirstName(s.getFirstName());
-            student.setLastName(s.getLastName());
-            student.setMiddleName(s.getMiddleName());
-            group.ifPresent(student::setGroup);
-            students.add(student);
-        }
-        return studentRepository.saveAll(students);
+            group.ifPresent(g -> {
+                student.setGroup(g);
+                student.setFirstName(s.getFirstName());
+                student.setLastName(s.getLastName());
+                student.setMiddleName(s.getMiddleName());
+                students.add(student);
+            });
+        });
+        studentRepository.saveAll(students);
     }
 
-    //TODO: POJO parsing to Aspects. Create Student from POJO make automated or use constructor.
     @Transactional
     @Override
-    public Student update(Long id, StudentPOJO studentPOJO) {
+    public void update(Long id, StudentPOJO studentPOJO) {
         Optional<Group> group = groupRepository.findById(studentPOJO.getGroupId());
         Student student = new Student();
-        student.setId(id);
-        student.setFirstName(studentPOJO.getFirstName());
-        student.setLastName(studentPOJO.getLastName());
-        student.setMiddleName(studentPOJO.getMiddleName());
-        group.ifPresent(student::setGroup);
-        return studentRepository.save(student);
-    }
-
-    @Override
-    public void delete(Long id) {
-        studentRepository.deleteById(id);
+        group.ifPresent(g -> {
+            student.setId(id);
+            student.setGroup(g);
+            student.setFirstName(studentPOJO.getFirstName());
+            student.setLastName(studentPOJO.getLastName());
+            student.setMiddleName(studentPOJO.getMiddleName());
+            studentRepository.save(student);
+        });
     }
 }
