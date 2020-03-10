@@ -89,8 +89,7 @@ class StudentServiceImplTest {
         studentPOJOS.add(new StudentPOJO(null, "Test2", "Test22", "test222", 2L));
         List<Student> students = new ArrayList<>();
 
-        when(groupRepository.findById(1L)).thenReturn(Optional.empty());
-        when(groupRepository.findById(2L)).thenReturn(Optional.empty());
+        when(groupRepository.findById(anyLong())).thenReturn(Optional.empty());
         studentService.createAll(studentPOJOS);
         verify(studentRepository).saveAll(students);
     }

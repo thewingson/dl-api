@@ -88,8 +88,7 @@ class GroupServiceImplTest {
         groupPOJOS.add(new GroupPOJO(null, 2L, 2L, 2L));
         List<Group> groups = new ArrayList<>();
 
-        when(departmentRepository.findById(1L)).thenReturn(Optional.empty());
-        when(departmentRepository.findById(2L)).thenReturn(Optional.empty());
+        when(departmentRepository.findById(anyLong())).thenReturn(Optional.empty());
         groupService.createAll(groupPOJOS);
         verify(groupRepository).saveAll(groups);
     }

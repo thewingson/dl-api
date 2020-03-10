@@ -88,8 +88,7 @@ class DepartmentServiceImplTest {
         departmentPOJOS.add(new DepartmentPOJO(null, "Test2", "Test22", 2L));
         List<Department> departments = new ArrayList<>();
 
-        when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
-        when(facultyRepository.findById(2L)).thenReturn(Optional.empty());
+        when(facultyRepository.findById(anyLong())).thenReturn(Optional.empty());
         departmentService.createAll(departmentPOJOS);
         verify(departmentRepository).saveAll(departments);
     }
