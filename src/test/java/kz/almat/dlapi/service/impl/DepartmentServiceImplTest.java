@@ -44,8 +44,8 @@ class DepartmentServiceImplTest {
     @Test
     void create_ok() throws Exception {
         DepartmentPOJO departmentPOJO = new DepartmentPOJO(null, "Test1", "Test11", 1L);
-
-        Faculty faculty = new Faculty(1L, "Test1", new HashSet<>());
+        Faculty faculty = new Faculty();
+        faculty.setId(1L);
         Department department = new Department(null, "Test1", "Test11", faculty, new HashSet<>());
 
         when(facultyRepository.findById(departmentPOJO.getFacultyId())).thenReturn(Optional.of(faculty));
@@ -67,16 +67,16 @@ class DepartmentServiceImplTest {
         List<DepartmentPOJO> departmentPOJOS = new ArrayList<>();
         departmentPOJOS.add(new DepartmentPOJO(null, "Test1", "Test11", 1L));
         departmentPOJOS.add(new DepartmentPOJO(null, "Test2", "Test22", 2L));
-
-        Faculty faculty1 = new Faculty(1L, "Test1", new HashSet<>());
-        Faculty faculty2 = new Faculty(1L, "Test2", new HashSet<>());
-
+        Faculty faculty1 = new Faculty();
+        faculty1.setId(1L);
+        Faculty faculty2 = new Faculty();
+        faculty2.setId(2L);
         List<Department> departments = new ArrayList<>();
         departments.add(new Department(null, "Test1", "Test11", faculty1, new HashSet<>()));
         departments.add(new Department(null, "Test2", "Test22", faculty2, new HashSet<>()));
 
-        when(facultyRepository.findById(departmentPOJOS.get(0).getFacultyId())).thenReturn(Optional.of(faculty1));
-        when(facultyRepository.findById(departmentPOJOS.get(1).getFacultyId())).thenReturn(Optional.of(faculty2));
+        when(facultyRepository.findById(1L)).thenReturn(Optional.of(faculty1));
+        when(facultyRepository.findById(2L)).thenReturn(Optional.of(faculty2));
         departmentService.createAll(departmentPOJOS);
         verify(departmentRepository).saveAll(departments);
     }
@@ -86,11 +86,10 @@ class DepartmentServiceImplTest {
         List<DepartmentPOJO> departmentPOJOS = new ArrayList<>();
         departmentPOJOS.add(new DepartmentPOJO(null, "Test1", "Test11", 1L));
         departmentPOJOS.add(new DepartmentPOJO(null, "Test2", "Test22", 2L));
-
         List<Department> departments = new ArrayList<>();
 
-        when(facultyRepository.findById(departmentPOJOS.get(0).getFacultyId())).thenReturn(Optional.empty());
-        when(facultyRepository.findById(departmentPOJOS.get(1).getFacultyId())).thenReturn(Optional.empty());
+        when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
+        when(facultyRepository.findById(2L)).thenReturn(Optional.empty());
         departmentService.createAll(departmentPOJOS);
         verify(departmentRepository).saveAll(departments);
     }
@@ -98,8 +97,8 @@ class DepartmentServiceImplTest {
     @Test
     void update_ok() throws Exception {
         DepartmentPOJO departmentPOJO = new DepartmentPOJO(null, "Test1", "Test11", 1L);
-
-        Faculty faculty = new Faculty(1L, "Test1", new HashSet<>());
+        Faculty faculty = new Faculty();
+        faculty.setId(1L);
         Department department = new Department(1L, "Test1", "Test11", faculty, new HashSet<>());
 
         when(facultyRepository.findById(departmentPOJO.getFacultyId())).thenReturn(Optional.of(faculty));

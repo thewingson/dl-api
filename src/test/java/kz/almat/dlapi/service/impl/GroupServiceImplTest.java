@@ -44,8 +44,8 @@ class GroupServiceImplTest {
     @Test
     void create_ok() throws Exception {
         GroupPOJO groupPOJO = new GroupPOJO(null, 1L, 1L, 1L);
-
-        Department department = new Department(1L, "Test1", "Test11", null, new HashSet<>());
+        Department department = new Department();
+        department.setId(1L);
         Group group = new Group(null, 1L, 1L, department, new HashSet<>(), new ArrayList<>());
 
         when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
@@ -67,10 +67,10 @@ class GroupServiceImplTest {
         List<GroupPOJO> groupPOJOS = new ArrayList<>();
         groupPOJOS.add(new GroupPOJO(null, 1L, 1L, 1L));
         groupPOJOS.add(new GroupPOJO(null, 2L, 2L, 2L));
-
-        Department department1 = new Department(1L, "Test1", "Test11", null, new HashSet<>());
-        Department department2 = new Department(2L, "Test2", "Test22", null, new HashSet<>());
-
+        Department department1 = new Department();
+        department1.setId(1L);
+        Department department2 = new Department();
+        department2.setId(2L);
         List<Group> groups = new ArrayList<>();
         groups.add(new Group(null, 1L, 1L, department1, new HashSet<>(), new ArrayList<>()));
         groups.add(new Group(null, 2L, 2L, department2, new HashSet<>(), new ArrayList<>()));
@@ -83,11 +83,9 @@ class GroupServiceImplTest {
 
     @Test
     void createAll_departmentNotFound() throws Exception {
-
         List<GroupPOJO> groupPOJOS = new ArrayList<>();
         groupPOJOS.add(new GroupPOJO(null, 1L, 1L, 1L));
         groupPOJOS.add(new GroupPOJO(null, 2L, 2L, 2L));
-
         List<Group> groups = new ArrayList<>();
 
         when(departmentRepository.findById(1L)).thenReturn(Optional.empty());
@@ -99,8 +97,8 @@ class GroupServiceImplTest {
     @Test
     void update_ok() throws Exception {
         GroupPOJO groupPOJO = new GroupPOJO(null, 1L, 1L, 1L);
-
-        Department department = new Department(1L, "Test1", "Test11", null, new HashSet<>());
+        Department department = new Department();
+        department.setId(1L);
         Group group = new Group(1L, 1L, 1L, department, new HashSet<>(), new ArrayList<>());
 
         when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
