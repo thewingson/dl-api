@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 /**
  * @author almat_rakhmetolla on 10.03.2020
  * <p>
- * Unit test for {@link kz.almat.dlapi.service.DepartmentService}
+ * Unit test for {@link DepartmentService}
  */
 
 @RunWith(SpringRunner.class)
@@ -59,7 +59,7 @@ class DepartmentServiceImplTest {
 
         when(facultyRepository.findById(departmentPOJO.getFacultyId())).thenReturn(Optional.empty());
         departmentService.create(departmentPOJO);
-        verify(departmentRepository, times(0)).save(any(Department.class));
+        verify(departmentRepository, never()).save(any(Department.class));
     }
 
     @Test
@@ -113,6 +113,6 @@ class DepartmentServiceImplTest {
 
         when(facultyRepository.findById(departmentPOJO.getFacultyId())).thenReturn(Optional.empty());
         departmentService.update(1L, departmentPOJO);
-        verify(departmentRepository, times(0)).save(any(Department.class));
+        verify(departmentRepository, never()).save(any(Department.class));
     }
 }
