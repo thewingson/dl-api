@@ -59,14 +59,14 @@ public interface SubjectClassRepository extends JpaRepository<SubjectClass, Long
 
     @Modifying
     @Query(value = "update almat.subject_class sc " +
-            "set sc.group_id = :groupId, " +
-            "sc.subject_id = :subjectId, " +
+            "set sc.subject_id = :subjectId, " +
+            "sc.group_id = :groupId, " +
             "sc.teacher_id = :teacherId " +
             "where sc.id = :id",
             nativeQuery = true)
-    void updateById(@Param("subjectId") Long subjectId,
+    void updateById(@Param("id") Long id,
+                    @Param("subjectId") Long subjectId,
                    @Param("groupId") Long groupId,
-                   @Param("teacherId") Long teacherId,
-                   @Param("id") Long id);
+                   @Param("teacherId") Long teacherId);
 
 }

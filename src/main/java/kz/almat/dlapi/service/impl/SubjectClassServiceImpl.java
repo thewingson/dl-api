@@ -56,9 +56,9 @@ public class SubjectClassServiceImpl implements SubjectClassService {
     @Override
     public void update(Long id, SubjectClassPOJO subjectClassPOJO) {
         subjectClassRepository.updateById(id,
+                subjectClassPOJO.getSubjectId(),
                 subjectClassPOJO.getGroupId(),
-                subjectClassPOJO.getTeacherId(),
-                subjectClassPOJO.getId());
+                subjectClassPOJO.getTeacherId());
     }
 
 }
