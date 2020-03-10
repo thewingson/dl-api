@@ -51,7 +51,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void createAll() {
+    void createAll() throws Exception {
         List<FacultyPOJO> facultyPOJOS = new ArrayList<>();
         facultyPOJOS.add(new FacultyPOJO(null, "Test1"));
         facultyPOJOS.add(new FacultyPOJO(null, "Test2"));
@@ -65,7 +65,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void update() {
+    void update() throws Exception {
         FacultyPOJO facultyPOJO = new FacultyPOJO(null, "Test1");
         Faculty faculty = new Faculty(1L, "Test1", new HashSet<>());
 
