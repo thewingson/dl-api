@@ -37,12 +37,8 @@ class FacultyServiceImplTest {
     @MockBean
     private FacultyRepository facultyRepository;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
-    void create() throws Exception{
+    void create_ok() throws Exception{
         FacultyPOJO facultyPOJO = new FacultyPOJO(null, "Test1");
         Faculty faculty = new Faculty(null, "Test1", new HashSet<>());
 
@@ -51,7 +47,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void createAll() throws Exception {
+    void createAll_ok() throws Exception {
         List<FacultyPOJO> facultyPOJOS = new ArrayList<>();
         facultyPOJOS.add(new FacultyPOJO(null, "Test1"));
         facultyPOJOS.add(new FacultyPOJO(null, "Test2"));
@@ -65,7 +61,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void update() throws Exception {
+    void update_ok() throws Exception {
         FacultyPOJO facultyPOJO = new FacultyPOJO(null, "Test1");
         Faculty faculty = new Faculty(1L, "Test1", new HashSet<>());
 
