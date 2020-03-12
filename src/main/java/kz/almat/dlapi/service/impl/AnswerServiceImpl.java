@@ -38,7 +38,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void update(Long id, AnswerPOJO answerPOJO) {
-        answerRepository.updateById(answerPOJO.getTaskId(), answerPOJO.getStudentId(), answerPOJO.getMessage(), answerPOJO.getId());
+        answerRepository.updateById(answerPOJO.getTaskId(), answerPOJO.getStudentId(), answerPOJO.getMessage(), id);
     }
 
 }

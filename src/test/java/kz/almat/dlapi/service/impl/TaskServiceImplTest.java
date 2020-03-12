@@ -78,7 +78,7 @@ class TaskServiceImplTest {
     }
 
     @Test
-    void update_ok() {
+    void update_ok() throws Exception {
         List<Long> subjectClassesLong = new ArrayList<>();
         List<SubjectClass> subjectClasses = new ArrayList<>();
         TaskPOJO taskPOJO = new TaskPOJO(null, 10, "Test1", "Test11", new Timestamp(1), subjectClassesLong);
