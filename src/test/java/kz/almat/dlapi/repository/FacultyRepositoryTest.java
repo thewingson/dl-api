@@ -3,7 +3,6 @@ package kz.almat.dlapi.repository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import kz.almat.dlapi.model.Faculty;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +39,6 @@ import static org.junit.Assert.assertEquals;
         DbUnitTestExecutionListener.class})
 @TestPropertySource("/application-test.properties")
 @Transactional
-@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL)
 class FacultyRepositoryTest {
 
     @Autowired
@@ -68,18 +66,19 @@ class FacultyRepositoryTest {
     @ExpectedDatabase(value = "/db/dbunit/faculty/after-save-one.xml", table = "faculty")
     public void saveOne_success() throws Exception {
         facultyRepository.save(new Faculty(null, "Test4", new HashSet<>()));
-        facultyRepository.findAll();
+        List<Faculty> all = facultyRepository.findAll();
+        System.out.println("ONE: " + all);
     }
 
     @Test
     @ExpectedDatabase(value = "/db/dbunit/faculty/after-save-all.xml", table = "faculty")
     public void saveAll_success() throws Exception {
         List<Faculty> faculties = new ArrayList<>();
-        faculties.add(new Faculty(1L, "Test4", new HashSet<>()));
-        faculties.add(new Faculty(2L, "Test5", new HashSet<>()));
+        faculties.add(new Faculty(null, "Test4", new HashSet<>()));
+        faculties.add(new Faculty(null, "Test5", new HashSet<>()));
         facultyRepository.saveAll(faculties);
         List<Faculty> all = facultyRepository.findAll();
-        System.out.println(all);
+        System.out.println("ALL: " + all);
     }
 
     @Test
