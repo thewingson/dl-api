@@ -30,7 +30,8 @@ public class SubjectClassRest {
         this.subjectClassService = subjectClassService;
     }
 
-    //TODO: Cover responses by ResponseEntity or other response object.    @GetMapping
+    //TODO: Cover responses by ResponseEntity or other response object.
+    @GetMapping
     public List<SubjectClassDTO> getAll() {
         return subjectClassRepository.findAllConvertedToDTO();
     }
