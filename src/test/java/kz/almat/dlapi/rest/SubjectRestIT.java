@@ -1,10 +1,10 @@
 package kz.almat.dlapi.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.almat.dlapi.model.Faculty;
-import kz.almat.dlapi.pojo.FacultyPOJO;
-import kz.almat.dlapi.repository.FacultyRepository;
-import kz.almat.dlapi.service.FacultyService;
+import kz.almat.dlapi.model.Subject;
+import kz.almat.dlapi.pojo.SubjectPOJO;
+import kz.almat.dlapi.repository.SubjectRepository;
+import kz.almat.dlapi.service.SubjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,16 +29,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * @author almat_rakhmetolla on 12.03.2020
+ * @author almat_rakhmetolla on 13.03.2020
  * <p>
- * Integration test for {@link FacultyRest}
+ * Integration test for {@link SubjectRest}
  */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class FacultyRestIT {
+class SubjectRestIT {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -47,19 +46,20 @@ class FacultyRestIT {
     private MockMvc mockMvc;
 
     @MockBean
-    private FacultyService facultyService;
+    private SubjectService subjectService;
 
     @MockBean
-    private FacultyRepository facultyRepository;
+    private SubjectRepository subjectRepository;
+
 
     @Test
     void getAll_ok() throws Exception {
-        List<Faculty> faculties = new ArrayList<>();
-        faculties.add(new Faculty(1L, "Test1", new HashSet<>()));
-        faculties.add(new Faculty(2L, "Test2", new HashSet<>()));
+        List<Subject> subjects = new ArrayList<>();
+        subjects.add(new Subject(1L, "Test1", new ArrayList<>()));
+        subjects.add(new Subject(2L, "Test2", new ArrayList<>()));
 
-        when(facultyRepository.findAll()).thenReturn(faculties);
-        mockMvc.perform(get("/faculty"))
+        when(subjectRepository.findAll()).thenReturn(subjects);
+        mockMvc.perform(get("/subject"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -67,68 +67,68 @@ class FacultyRestIT {
                 .andExpect(jsonPath("$[0].name", is("Test1")))
                 .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[1].name", is("Test2")));
-        verify(facultyRepository).findAll();
+        verify(subjectRepository).findAll();
     }
 
     @Test
     void getOne_ok() throws Exception {
-        Faculty faculty = new Faculty(1L, "Test1", new HashSet<>());
+        Subject subject = new Subject(1L, "Test1", new ArrayList<>());
 
-        when(facultyRepository.findById(1L)).thenReturn(Optional.of(faculty));
-        mockMvc.perform(get("/faculty/1"))
+        when(subjectRepository.findById(1L)).thenReturn(Optional.of(subject));
+        mockMvc.perform(get("/subject/1"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Test1")));
-        verify(facultyRepository).findById(1L);
+        verify(subjectRepository).findById(1L);
     }
 
     @Test
     void add_ok() throws Exception {
-        FacultyPOJO facultyPOJO = new FacultyPOJO(null, "Test1");
+        SubjectPOJO subjectPOJO = new SubjectPOJO(null, "Test1");
 
-        mockMvc.perform(post("/faculty")
-                .content(om.writeValueAsString(facultyPOJO))
+        mockMvc.perform(post("/subject")
+                .content(om.writeValueAsString(subjectPOJO))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(facultyService).create(facultyPOJO);
+        verify(subjectService).create(subjectPOJO);
     }
 
     @Test
     void addAll_ok() throws Exception {
-        List<FacultyPOJO> facultyPOJOS = new ArrayList<>();
-        facultyPOJOS.add(new FacultyPOJO(null, "Test1"));
-        facultyPOJOS.add(new FacultyPOJO(null, "Test2"));
+        List<SubjectPOJO> subjectPOJOS = new ArrayList<>();
+        subjectPOJOS.add(new SubjectPOJO(null, "Test1"));
+        subjectPOJOS.add(new SubjectPOJO(null, "Test2"));
 
-        mockMvc.perform(post("/faculty/all")
-                .content(om.writeValueAsString(facultyPOJOS))
+        mockMvc.perform(post("/subject/all")
+                .content(om.writeValueAsString(subjectPOJOS))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(facultyService).createAll(facultyPOJOS);
+        verify(subjectService).createAll(subjectPOJOS);
     }
 
     @Test
     void edit_ok() throws Exception {
-        FacultyPOJO facultyPOJO = new FacultyPOJO(null, "Test1");
+        SubjectPOJO subjectPOJO = new SubjectPOJO(null, "Test1");
 
-        mockMvc.perform(put("/faculty/1")
-                .content(om.writeValueAsString(facultyPOJO))
+        mockMvc.perform(put("/subject/1")
+                .content(om.writeValueAsString(subjectPOJO))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(facultyService).update(1L, facultyPOJO);
+        verify(subjectService).update(1L, subjectPOJO);
     }
 
     @Test
     void delete_ok() throws Exception {
-        mockMvc.perform(delete("/faculty/1"))
+        mockMvc.perform(delete("/subject/1"))
                 .andExpect(status().isOk());
-        verify(facultyRepository).deleteById(1L);
+        verify(subjectRepository).deleteById(1L);
     }
 
     @Test
-    void deleteAll_ok() throws Exception {
-        mockMvc.perform(delete("/faculty/all"))
+    void deleteAll() throws Exception {
+        mockMvc.perform(delete("/subject/all"))
                 .andExpect(status().isOk());
-        verify(facultyRepository).deleteAll();
+        verify(subjectRepository).deleteAll();
     }
 }
