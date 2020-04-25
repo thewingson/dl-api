@@ -4,21 +4,15 @@ import kz.almat.dlapi.model.Faculty;
 import kz.almat.dlapi.pojo.FacultyPOJO;
 import kz.almat.dlapi.repository.FacultyRepository;
 import kz.almat.dlapi.service.FacultyService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author almat_rakhmetolla on 10.03.2020
@@ -26,10 +20,7 @@ import static org.mockito.Mockito.when;
  * Unit test for {@link FacultyService}
  */
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource("/application-test.properties")
-class FacultyServiceImplTest {
+class FacultyServiceImplTest extends AbstractServiceImplTest {
 
     @Autowired
     private FacultyService facultyService;

@@ -6,15 +6,10 @@ import kz.almat.dlapi.pojo.GroupPOJO;
 import kz.almat.dlapi.repository.GroupRepository;
 import kz.almat.dlapi.service.GroupService;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -34,11 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration test for {@link GroupRest}
  */
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-class GroupRestIT {
+class GroupRestIT extends AbstractRestIT {
 
     private static final ObjectMapper om = new ObjectMapper();
 

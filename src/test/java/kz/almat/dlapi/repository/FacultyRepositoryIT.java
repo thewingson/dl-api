@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  * Integration test for {@link FacultyRepository}
  */
 
-class FacultyRepositoryIT extends AbstractRepositoryIT {
+class FacultyRepositoryIT extends AbstractRepositoryIT<Faculty> {
 
     @Autowired
     private FacultyRepository facultyRepository;

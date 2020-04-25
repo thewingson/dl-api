@@ -7,12 +7,8 @@ import kz.almat.dlapi.repository.SubjectRepository;
 import kz.almat.dlapi.repository.TeacherRepository;
 import kz.almat.dlapi.service.SubjectClassService;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +21,7 @@ import static org.mockito.Mockito.verify;
  * Unit test for {@link SubjectClassService}
  */
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource("/application-test.properties")
-class SubjectClassServiceImplTest {
+class SubjectClassServiceImplTest extends AbstractServiceImplTest {
 
     @Autowired
     private SubjectClassService subjectClassService;

@@ -1,0 +1,5 @@
+<dataset>
+    <Department id="1" name="Test1" code="Test11" faculty_id="1"/>
+    <Department id="2" name="Test2" code="Test22" faculty_id="2"/>
+    <Department id="3" name="Test3" code="Test33" faculty_id="3"/>
+</dataset>
